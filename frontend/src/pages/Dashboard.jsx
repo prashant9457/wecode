@@ -1,270 +1,298 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { 
-  Home, 
-  Plus, 
-  Settings, 
-  LogOut, 
-  User, 
-  Users, 
-  MessageSquare, 
-  Hash, 
-  Compass, 
-  Bell,
-  Search,
-  Rocket
+import { useNavigate } from 'react-router-dom';
+import DiscordLayout from '@/components/layout/DiscordLayout';
+import {
+    Users,
+    Hash,
+    HelpCircle,
+    Terminal,
+    Search,
+    MessageSquare,
+    PlusCircle,
+    ArrowRight,
+    AtSign,
+    UserCheck
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-const Dashboard = () => {
+import ContentProfile from '@/components/dashboard/ContentProfile';
+import ContentGroup from '@/components/dashboard/ContentGroup';
+import DashboardStats from '@/components/dashboard/DashboardStats';
+
+import FriendGrid from '@/components/dashboard/FriendGrid';
+import GroupsGrid from '@/components/dashboard/GroupsGrid';
+
+import WebGLLoader from '@/components/common/WebGLLoader';
+
+const Dashboard = ({ openSearch }) => {
   const navigate = useNavigate();
-  const { username: urlUsername } = useParams();
-  const [user, setUser] = useState(null);
-  const [activeTab, setActiveTab] = useState('home');
+  const [stats, setStats] = useState({
+    totalSolved: 0,
+    recentSolved: [],
+    friends: [],
+    totalFriends: 0,
+    pendingCount: 0
+  });
+  const [feed, setFeed] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
+  // Column 1 State
+  const [activeCategory, setActiveCategory] = useState('dms');
+  
+  // Column 2 & 3 Selection State
+  const [activeSelection, setActiveSelection] = useState(null); 
+  
+  // Column 3 Sub-View State (for Feed/Overview)
+  const [activeView, setActiveView] = useState('launchpad'); 
+  
+  // Column 4 Panel State
+  const [rightWidth, setRightWidth] = useState(() => Number(localStorage.getItem('wecode_right_width')) || 340);
+  const [isRightCollapsed, setIsRightCollapsed] = useState(() => localStorage.getItem('wecode_right_collapsed') === 'true');
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      navigate('/login');
-      return;
-    }
+    useEffect(() => {
+        localStorage.setItem('wecode_right_width', rightWidth);
+    }, [rightWidth]);
 
-    const storedEmail = localStorage.getItem('userEmail');
-    const storedUsername = localStorage.getItem('username');
-    
-    setUser({ 
-      email: storedEmail || 'user@example.com', 
-      username: storedUsername || urlUsername || 'Guest' 
-    });
-  }, [navigate, urlUsername]);
+    useEffect(() => {
+        localStorage.setItem('wecode_right_collapsed', isRightCollapsed);
+    }, [isRightCollapsed]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userEmail');
-    localStorage.removeItem('username');
-    navigate('/');
-  };
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/login');
+            return;
+        }
 
-  const servers = [
-    { id: '1', name: 'Web Devs', initial: 'W', color: 'bg-indigo-500' },
-    { id: '2', name: 'React Pros', initial: 'R', color: 'bg-emerald-500' },
-    { id: '3', name: 'Design Hub', initial: 'D', color: 'bg-rose-500' },
-    { id: '4', name: 'Study Group', initial: 'S', color: 'bg-amber-500' },
-  ];
+        const fetchData = async () => {
+            try {
+                const [statsRes, feedRes, friendsRes] = await Promise.all([
+                    fetch('http://localhost:5000/api/dashboard/stats', {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    }),
+                    fetch('http://localhost:5000/api/feed', {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    }),
+                    fetch('http://localhost:5000/api/friends', {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    })
+                ]);
 
-  return (
-    <div className="flex h-screen w-full bg-[#313338] text-[#dbdee1] overflow-hidden">
-      
-      {/* 1. Server Sidebar (Narrow) */}
-      <nav className="w-[72px] flex flex-col items-center py-3 space-y-2 bg-[#1e1f22] shrink-0">
-        <ServerIcon icon={<Home size={28} />} active={activeTab === 'home'} onClick={() => setActiveTab('home')} color="bg-[#313338] text-emerald-500 hover:bg-emerald-500 hover:text-white rounded-[24px] hover:rounded-[16px]" />
-        
-        <div className="w-8 h-[2px] bg-[#35363c] rounded-full mx-auto my-2" />
-        
-        {servers.map((server) => (
-          <ServerIcon 
-            key={server.id} 
-            text={server.initial} 
-            tooltip={server.name}
-            active={activeTab === server.id} 
-            onClick={() => setActiveTab(server.id)}
-            color={server.color}
-          />
-        ))}
-        
-        <ServerIcon icon={<Plus size={24} />} color="bg-[#313338] text-emerald-500 hover:bg-emerald-500 hover:text-white" tooltip="Add a Server" />
-        <ServerIcon icon={<Compass size={24} />} color="bg-[#313338] text-emerald-500 hover:bg-emerald-500 hover:text-white" tooltip="Explore Discoverable Servers" />
+                if (statsRes.status === 401 || feedRes.status === 401 || friendsRes.status === 401) {
+                    localStorage.clear();
+                    navigate('/login');
+                    return;
+                }
 
-        <div className="mt-auto pt-2 space-y-2">
-           <div className="w-8 h-[2px] bg-[#35363c] rounded-full mx-auto my-2" />
-           <ServerIcon 
-            icon={<User size={24} />} 
-            tooltip="ProfileSettings"
-            active={activeTab === 'profile'}
-            onClick={() => setActiveTab('profile')}
-            color="bg-slate-700"
-          />
-        </div>
-      </nav>
+                if (statsRes.ok && friendsRes.ok) {
+                    const statsData = await statsRes.json();
+                    const friendsData = await friendsRes.json();
+                    
+                    setStats({
+                        totalFriends: statsData.totalFriends || 0,
+                        pendingCount: statsData.pendingCount || 0,
+                        friends: Array.isArray(friendsData) ? friendsData : [],
+                        totalSolved: statsData.totalSolved || 0,
+                        recentSolved: Array.isArray(statsData.recentSolved) ? statsData.recentSolved : []
+                    });
+                }
 
-      {/* 2. Channel Sidebar (Wide) */}
-      <aside className="w-[240px] flex flex-col bg-[#2b2d31] shrink-0">
-        <header className="h-12 px-4 flex items-center shadow-sm border-b border-[#1e1f22] font-semibold text-white truncate">
-          {activeTab === 'home' ? 'Direct Messages' : servers.find(s => s.id === activeTab)?.name || 'Server'}
-        </header>
-        
-        <div className="flex-1 overflow-y-auto p-2 space-y-1 custom-scrollbar">
-          {activeTab === 'home' ? (
-            <>
-              <ChannelLink icon={<Users size={18} />} label="Friends" active />
-              <ChannelLink icon={<Rocket size={18} />} label="Nitro" />
-              <ChannelLink icon={<MessageSquare size={18} />} label="Message Requests" />
-              
-              <div className="pt-4 pb-1 px-2 text-xs font-semibold text-[#949ba4] uppercase flex justify-between items-center group">
-                Direct Messages
-                <Plus size={14} className="opacity-0 group-hover:opacity-100 cursor-pointer" />
-              </div>
-              <DMUser name="Prasant" status="online" />
-              <DMUser name="Wecode Support" status="idle" />
-            </>
-          ) : (
-            <>
-              <div className="pt-4 pb-1 px-2 text-xs font-semibold text-[#949ba4] uppercase flex justify-between items-center group">
-                Text Channels
-                <Plus size={14} className="opacity-0 group-hover:opacity-100 cursor-pointer" />
-              </div>
-              <ChannelLink icon={<Hash size={18} />} label="general" active />
-              <ChannelLink icon={<Hash size={18} />} label="announcements" />
-              <ChannelLink icon={<Hash size={18} />} label="resources" />
-              
-              <div className="pt-4 pb-1 px-2 text-xs font-semibold text-[#949ba4] uppercase flex justify-between items-center group">
-                Voice Channels
-                <Plus size={14} className="opacity-0 group-hover:opacity-100 cursor-pointer" />
-              </div>
-              <ChannelLink icon={<Bell size={18} />} label="General Voice" />
-            </>
-          )}
-        </div>
+                if (feedRes.ok) {
+                    const feedData = await feedRes.json();
+                    setFeed(Array.isArray(feedData) ? feedData : []);
+                }
+            } catch (err) {
+                console.error('Teletransmission Sync Failure:', err.message);
+            } finally {
+                // Keep loading for a tactical second to show off the WebGL
+                setTimeout(() => setLoading(false), 1200);
+            }
+        };
 
-        {/* User Profile Bar at Bottom of Sidebar */}
-        <footer className="h-14 bg-[#232428] px-2 flex items-center gap-2 group shrink-0">
-          <div className="relative cursor-pointer" onClick={() => navigate(`/${user?.username}`)}>
-            <div className="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-xs font-bold text-white uppercase transition-opacity hover:opacity-80">
-              {user?.username?.[0] || 'U'}
+        fetchData();
+    }, [navigate]);
+
+    if (loading) return (
+        <div className="h-screen bg-[#313338] flex flex-col items-center justify-center gap-6">
+            <WebGLLoader size={120} />
+            <div className="flex flex-col items-center animate-pulse">
+                <p className="text-[10px] font-black text-white uppercase tracking-[0.4em] italic mb-1">Synchronizing Neural Hub</p>
+                <div className="w-48 h-[1px] bg-white/10 relative overflow-hidden">
+                    <div className="absolute inset-y-0 left-0 bg-indigo-500 w-1/3 animate-progress-flow" />
+                </div>
             </div>
-            <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-500 rounded-full border-[3px] border-[#232428]" />
-          </div>
-          <div className="flex-1 min-w-0 pr-1 cursor-pointer" onClick={() => navigate(`/${user?.username}`)}>
-            <div className="text-sm font-semibold text-white truncate hover:underline">{user?.username}</div>
-            <div className="text-[11px] text-[#949ba4] truncate">Online</div>
-          </div>
-          <div className="flex items-center gap-0.5">
-            <div 
-              className="p-1.5 rounded-md hover:bg-[#35373c] text-[#b5bac1] cursor-pointer" 
-              onClick={() => navigate(`/${user?.username}`)}
-              title="Profile Settings"
-            >
-              <Settings size={16} />
-            </div>
-            <div className="p-1.5 rounded-md hover:bg-[#35373c] text-[#b5bac1] cursor-pointer" onClick={handleLogout} title="Logout">
-              <LogOut size={16} className="text-rose-400" />
-            </div>
-          </div>
-        </footer>
-      </aside>
-
-      {/* 3. Main Content Area */}
-      <main className="flex-1 flex flex-col bg-[#313338] min-w-0">
-        <header className="h-12 px-4 flex items-center shadow-sm border-b border-[#1e1f22] shrink-0">
-          <Hash size={24} className="text-[#80848e] mr-2" />
-          <span className="font-semibold text-white mr-auto">general</span>
-          
-          <div className="flex items-center gap-4 text-[#b5bac1]">
-            <Bell size={20} className="hover:text-white cursor-pointer" />
-            <Search size={20} className="hover:text-white cursor-pointer" />
-            <Users size={20} className="hover:text-white cursor-pointer" />
-          </div>
-        </header>
-        
-        <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <h1 className="text-3xl font-bold text-white mb-2">Welcome to #general</h1>
-            <p className="text-[#b5bac1] mb-8">This is the start of the #general channel.</p>
-            
-            <div className="space-y-4">
-              <Message author="System" time="Today at 4:20 PM" content="Welcome to the new WeCode platform! Start building something amazing." />
-              <Message author="Prasant" time="Today at 4:22 PM" content="The UI looks amazing! Very smooth." />
-              <Message author={user?.username || 'User'} time="Just now" content="Testing the new Discord-like layout. Everything is working perfectly." isOwn />
-            </div>
-          </div>
         </div>
+    );
 
-        {/* Message Input Container */}
-        <div className="px-4 pb-6 shrink-0">
-          <div className="bg-[#383a40] rounded-lg p-2.5 flex items-center gap-4">
-            <Plus className="bg-[#b5bac1] text-[#383a40] rounded-full p-0.5 cursor-pointer hover:bg-white" size={20} />
-            <input 
-              type="text" 
-              placeholder={`Message #general`}
-              className="bg-transparent border-none text-[15px] focus:ring-0 text-[#dbdee1] w-full placeholder:text-[#6d6f78]"
-            />
-          </div>
+    return (
+        <div className="h-screen flex flex-col bg-[#313338] overflow-hidden">
+            {/* Pure Minimalist Mission Header (Text Only Centered) */}
+            <header className="h-10 border-b border-[#1f2023] flex items-center justify-center px-3 shrink-0 bg-[#313338] z-20">
+                {/* Middle Part: Dynamic Centered Field Identity */}
+                <div className="flex items-center gap-2">
+                    <span className="font-black text-white text-[13px] uppercase tracking-[0.15em] truncate">
+                        {activeView === 'selection' && activeSelection?.data
+                            ? (activeSelection.type === 'friend' ? activeSelection.data.username : activeSelection.data.name) 
+                            : (activeCategory === 'dms' ? "FRIENDS" : "CITADELS")}
+                    </span>
+                    {activeView === 'selection' && activeSelection?.data && <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]" />}
+                </div>
+            </header>
+
+            <div className="flex-1 overflow-hidden">
+                <DiscordLayout 
+                    friends={stats.friends}
+                    activeCategory={activeCategory}
+                    activeSelectionId={activeView === 'friends' ? 'friends_grid_global' : (activeSelection?.type === 'friend' ? activeSelection.data.username : activeSelection?.data.id)}
+                    onCategoryChange={(cat) => {
+                        setActiveCategory(cat);
+                        setActiveSelection(null);
+                        setActiveView(cat === 'dms' ? 'launchpad' : 'groups_grid');
+                    }}
+                    onSelectionChange={(type, data) => {
+                        setActiveSelection({ type, data });
+                        setActiveView('selection');
+                    }}
+                    onViewChange={(view) => {
+                        setActiveView(view);
+                        if (view !== 'selection') setActiveSelection(null);
+                    }}
+                >
+                    <div className="flex-1 flex overflow-hidden relative">
+                        <main className="flex-1 flex flex-col overflow-y-auto no-scrollbar relative bg-[#313338]">
+                            {activeView === 'selection' && activeSelection?.type === 'friend' && (
+                                <ContentProfile user={activeSelection.data} />
+                            )}
+
+                            {activeView === 'selection' && activeSelection?.type === 'group' && (
+                                <ContentGroup group={activeSelection.data} />
+                            )}
+
+                            {activeView === 'friends' && (
+                                <FriendGrid 
+                                    friends={stats.friends} 
+                                    onSelect={(f) => { setActiveSelection({ type: 'friend', data: f }); setActiveView('selection'); }} 
+                                    activeId={activeSelection?.data?.username} 
+                                />
+                            )}
+
+                            {activeView === 'groups_grid' && (
+                                <GroupsGrid 
+                                    groups={[
+                                        { id: 'g1', name: 'Alpha-Coders', description: 'Advanced tactical algorithm conquest cluster.', members: 12, isPrivate: false },
+                                        { id: 'g2', name: 'Bit-Crushers', description: 'High-speed bit manipulation and system design study node.', members: 8, isPrivate: true }
+                                    ]} 
+                                    onSelect={(g) => { setActiveSelection({ type: 'group', data: g }); setActiveView('selection'); }} 
+                                    activeId={activeSelection?.data?.id}
+                                />
+                            )}
+
+                            {activeView === 'launchpad' && (
+                                <div className="flex-1 flex flex-col items-center justify-center p-10 text-center max-w-2xl mx-auto">
+                                    <div className="w-24 h-24 rounded-3xl bg-indigo-500/10 flex items-center justify-center text-indigo-500 mb-8 border border-indigo-500/20 shadow-xl shadow-indigo-500/5 rotate-3 hover:rotate-0 transition-transform duration-500">
+                                        <MessageSquare size={48} />
+                                    </div>
+                                    <h1 className="text-4xl font-black text-white mb-4 tracking-tighter uppercase italic">Start Convo</h1>
+                                    <p className="text-[#b5bac1] text-lg mb-10 leading-relaxed font-medium">Connect with tactical peers, synchronize results, and dominate the algorithmic arena through collaborative insight.</p>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+                                        <button
+                                            onClick={() => setActiveView('friends')}
+                                            className="bg-indigo-500 hover:bg-indigo-400 text-white p-6 rounded-2xl flex flex-col items-start gap-3 transition-all group border border-white/10 shadow-lg hover:translate-y-[-2px]"
+                                        >
+                                            <PlusCircle size={24} />
+                                            <div className="text-left">
+                                                <span className="block font-black uppercase text-[12px] tracking-widest opacity-80">Action // Start</span>
+                                                <span className="block font-bold text-xl">New Conversation</span>
+                                            </div>
+                                        </button>
+                                        <button
+                                            onClick={() => setActiveView('friends')}
+                                            className="bg-[#2b2d31] hover:bg-[#35373c] text-white p-6 rounded-2xl flex flex-col items-start gap-3 transition-all group border border-[#1f2023] shadow-lg hover:translate-y-[-2px]"
+                                        >
+                                            <Users size={24} className="text-indigo-400" />
+                                            <div className="text-left">
+                                                <span className="block font-black uppercase text-[12px] tracking-widest text-[#949ba4]">Action // Grid</span>
+                                                <span className="block font-bold text-xl">Sync Combatants</span>
+                                            </div>
+                                        </button>
+                                    </div>
+
+                                    <div className="mt-12 w-full pt-10 border-t border-[#3f4147]/30">
+                                        <p className="text-[11px] font-bold text-[#b5bac1] uppercase tracking-[0.3em] mb-6">Recent Combatant Nodes</p>
+                                        <div className="flex flex-wrap justify-center gap-4">
+                                            {stats?.friends?.slice(0, 4).map((f, i) => (
+                                                <div key={i} onClick={() => { setActiveSelection({ type: 'friend', data: f }); setActiveView('selection'); }} className="flex items-center gap-3 bg-[#1e1f22] p-2 pr-4 rounded-xl border border-[#2b2d31] hover:border-indigo-500/50 transition-all hover:bg-[#2b2d31] cursor-pointer">
+                                                    <div className="w-8 h-8 rounded-full overflow-hidden bg-[#2b2d31]">
+                                                        {f.profile_picture ? <img src={f.profile_picture} className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center text-[10px] font-bold text-white">{f.username ? f.username[0] : '?'}</div>}
+                                                    </div>
+                                                    <span className="text-xs font-bold text-white">@{f.username}</span>
+                                                </div>
+                                            ))}
+                                            <button onClick={() => setActiveView('friends')} className="w-8 h-8 rounded-full border border-dashed border-[#4e5058] flex items-center justify-center text-[#4e5058] hover:text-white hover:border-white transition-all">
+                                                <ArrowRight size={14} />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {activeView === 'feed' && (
+                                <div className="flex-1 flex flex-col overflow-y-auto no-scrollbar pt-6 pb-12 px-6 gap-6">
+                                    <div className="mb-8">
+                                        <div className="w-16 h-16 rounded-full bg-[#404249] flex items-center justify-center text-white mb-4">
+                                            <Hash size={40} />
+                                        </div>
+                                        <h1 className="text-3xl font-black text-white mb-2 uppercase italic tracking-tighter">Welcome to #operational-feed!</h1>
+                                        <p className="text-[#b5bac1]">This is the start of the #operational-feed channel. Tracking all system conquests.</p>
+                                    </div>
+
+                                    <div className="w-full h-[1px] bg-[#3f4147] my-2 relative">
+                                        <span className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#313338] px-2 text-[11px] font-black text-[#4e5058] uppercase tracking-widest">System Log</span>
+                                    </div>
+
+                                    <div className="flex-1 overflow-y-auto no-scrollbar p-6">
+                                        <div className="max-w-[700px] mx-auto space-y-4">
+                                            {feed && feed.length > 0 ? feed.map((msg, i) => (
+                                                <div key={i} className="group hover:bg-[#2e3035] -mx-6 px-6 py-1 transition-colors flex gap-4">
+                                                    <div className="w-10 h-10 rounded-full bg-indigo-600 shrink-0 mt-0.5 overflow-hidden">
+                                                        {msg.profile_picture ? <img src={msg.profile_picture} className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center text-white font-bold">{msg.username[0]}</div>}
+                                                    </div>
+                                                    <div className="flex-1 min-w-0">
+                                                        <div className="flex items-center gap-2">
+                                                            <span className="font-bold text-white hover:underline cursor-pointer">@{msg.username}</span>
+                                                            <span className="text-[11px] text-[#949ba4] font-medium">{new Date(msg.solved_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                                                        </div>
+                                                        <div className="text-[#dbdee1] leading-relaxed">
+                                                            Solved <span className="text-indigo-400 font-black">[{msg.title}]</span> on <span className="font-bold text-emerald-400">{msg.platform}</span>.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )) : (
+                                                <div className="py-20 text-center">
+                                                    <MessageSquare size={48} className="mx-auto text-[#4e5058] mb-4 opacity-20" />
+                                                    <p className="text-[13px] text-[#949ba4] font-bold uppercase tracking-widest opacity-40">Operational feed is silent.</p>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </main>
+
+                        <DashboardStats 
+                            stats={stats}
+                            isCollapsed={isRightCollapsed}
+                            onToggle={() => setIsRightCollapsed(!isRightCollapsed)}
+                            width={rightWidth}
+                            onResize={setRightWidth}
+                        />
+                    </div>
+                </DiscordLayout>
+            </div>
         </div>
-      </main>
-    </div>
-  );
+    );
 };
-
-// UI Components
-const ServerIcon = ({ icon, text, active, onClick, color, tooltip }) => (
-  <div className="relative group flex items-center justify-center">
-    {active && <div className="absolute left-0 w-1 h-10 bg-white rounded-r-full" />}
-    {!active && <div className="absolute left-0 w-1 h-0 bg-white rounded-r-full group-hover:h-5 transition-all duration-200" />}
-    <div 
-      onClick={onClick}
-      className={cn(
-        "w-12 h-12 flex items-center justify-center cursor-pointer transition-all duration-200",
-        active ? "rounded-[16px]" : "rounded-[24px]",
-        "group-hover:rounded-[16px]",
-        color,
-        "text-white font-bold text-lg"
-      )}
-    >
-      {icon || text}
-    </div>
-    {tooltip && (
-      <div className="absolute left-16 px-3 py-2 bg-black text-white text-xs font-bold rounded-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50 shadow-xl">
-        {tooltip}
-        <div className="absolute -left-1 top-1/2 -translate-y-1/2 border-y-4 border-y-transparent border-r-4 border-r-black" />
-      </div>
-    )}
-  </div>
-);
-
-const ChannelLink = ({ icon, label, active }) => (
-  <div className={cn(
-    "flex items-center gap-2 px-2 py-1.5 rounded-md cursor-pointer transition-colors mb-0.5 group",
-    active ? "bg-[#3f4147] text-white" : "text-[#949ba4] hover:bg-[#35373c] hover:text-[#dbdee1]"
-  )}>
-    <div className={active ? "text-[#dbdee1]" : "text-[#80848e] group-hover:text-[#dbdee1]"}>
-      {icon}
-    </div>
-    <span className="text-[15px] font-medium truncate">{label}</span>
-  </div>
-);
-
-const DMUser = ({ name, status }) => (
-  <div className="flex items-center gap-2 px-2 py-1.5 rounded-md cursor-pointer hover:bg-[#35373c] group mb-0.5">
-    <div className="relative shrink-0">
-      <div className="w-8 h-8 rounded-full bg-slate-600 flex items-center justify-center text-xs font-bold text-white uppercase group-hover:bg-slate-500 transition-colors">
-        {name[0]}
-      </div>
-      <div className={cn(
-        "absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-[2.5px] border-[#2b2d31] group-hover:border-[#35373c]",
-        status === 'online' ? 'bg-emerald-500' : status === 'idle' ? 'bg-amber-500' : 'bg-rose-500'
-      )} />
-    </div>
-    <span className="text-[15px] font-medium text-[#949ba4] group-hover:text-[#dbdee1] truncate">{name}</span>
-  </div>
-);
-
-const Message = ({ author, time, content, isOwn }) => (
-  <div className="flex gap-4 group hover:bg-[#2e3035] -mx-4 px-4 py-1 mt-2">
-    <div className="w-10 h-10 rounded-full bg-indigo-500 shrink-0 flex items-center justify-center text-white font-bold text-sm uppercase cursor-pointer">
-      {author[0]}
-    </div>
-    <div className="flex-1 min-w-0">
-      <div className="flex items-center gap-2">
-        <span className={cn("font-semibold hover:underline cursor-pointer", isOwn ? "text-emerald-400" : "text-white")}>
-          {author}
-        </span>
-        <span className="text-[11px] text-[#949ba4] font-medium">{time}</span>
-      </div>
-      <div className="text-[15px] text-[#dbdee1] leading-normal">{content}</div>
-    </div>
-  </div>
-);
 
 export default Dashboard;

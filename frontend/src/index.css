@@ -35,6 +35,13 @@
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
+  --animate-progress-flow: progress-flow 2s infinite linear;
+
+  @keyframes progress-flow {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(300%); }
+  }
+
   @keyframes accordion-down {
     from {
       height: 0;
@@ -135,5 +142,18 @@
     background-color: var(--background);
     color: var(--foreground);
     font-feature-settings: "rlig" 1, "calt" 1;
+
+    /* Scrimba-like Rich Grainy Gradient Background */
+    background: 
+      /* SVG Noise Overlay */
+      url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/200/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E') 0 0,
+      /* Rich Radial Gradient */
+      radial-gradient(100% 100% at 0% 0%, #200030 0%, #0d0014 40%, #000000 100%);
+    
+    background-size: 100px 100px, 100% 100%;
+    /* Blend the noise with the gradient */
+    background-blend-mode: overlay, normal;
+    background-attachment: fixed;
+    min-height: 100vh;
   }
 }
