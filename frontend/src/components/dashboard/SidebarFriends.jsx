@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { User, UserPlus, Inbox, Search, Activity } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import AddFriendModal from './AddFriendModal';
 import FriendRequestsModal from './FriendRequestsModal';
@@ -98,7 +99,9 @@ const SidebarFriends = ({ friends, onSelect, onViewChange, activeId }) => {
               </div>
             </div>
             <div className="flex-1 text-left min-w-0">
-               <p className="text-[14px] font-bold truncate">@{friend.username}</p>
+               <p className="text-[14px] font-bold truncate">
+                  <Link to={`/${friend.username}`} onClick={(e) => e.stopPropagation()} className="hover:underline">@{friend.username}</Link>
+               </p>
                <p className="text-[10px] text-[#949ba4] font-medium uppercase tracking-wider">Sync Active</p>
             </div>
           </button>

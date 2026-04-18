@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { User, MessageSquare, ChevronRight, Activity, Search, Filter } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
 const FriendGrid = ({ friends = [], onSelect, activeId }) => {
@@ -72,7 +73,7 @@ const FriendGrid = ({ friends = [], onSelect, activeId }) => {
                                 <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-[#23a559] rounded-full border-[3px] border-[#2b2d31]"></div>
                             </div>
                             <div className="min-w-0 flex-1">
-                                <h3 className="text-white font-bold text-[15px] truncate">@{friend.username}</h3>
+                                <Link to={`/${friend.username}`} onClick={(e) => e.stopPropagation()} className="hover:underline text-white font-bold text-[15px] truncate block">@{friend.username}</Link>
                                 <p className="text-[10px] text-[#949ba4] font-black tracking-widest uppercase">ID: {friend.id.slice(0, 8)}</p>
                             </div>
                         </div>

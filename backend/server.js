@@ -4,7 +4,8 @@ require('dotenv').config();
 
 const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes');
-const friendRoutes = require('./routes/friend.routes');
+const oldFriendRoutes = require('./routes/friend.routes');
+const friendRoutes = require('./src/routes/friendRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -21,7 +22,8 @@ app.get('/', (req, res) => {
 // Mounting Routes
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);
-app.use('/api', friendRoutes);
+app.use('/api', oldFriendRoutes); // Dashboard needs /api/feed, /api/friends, /api/dashboard/stats
+app.use("/api/social", friendRoutes); // New system at /api/social
 
 // App Listen
 const server = app.listen(PORT, () => {

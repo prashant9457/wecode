@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Check, X, User, Loader2, Inbox } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const FriendRequestsModal = ({ onClose, onUpdate }) => {
     const [requests, setRequests] = useState([]);
@@ -78,7 +79,9 @@ const FriendRequestsModal = ({ onClose, onUpdate }) => {
                                         {req.username[0].toUpperCase()}
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                        <p className="text-white font-bold truncate">@{req.username}</p>
+                                        <p className="text-white font-bold truncate">
+                                            <Link to={`/${req.username}`} className="hover:underline" onClick={(e) => e.stopPropagation()}>@{req.username}</Link>
+                                        </p>
                                         <p className="text-[11px] text-[#949ba4] font-bold uppercase tracking-tighter">Incoming Neural Sync</p>
                                     </div>
                                     <div className="flex items-center gap-2">

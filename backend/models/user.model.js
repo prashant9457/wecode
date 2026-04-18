@@ -22,7 +22,7 @@ const User = {
   async findByUsername(username) {
     const { data } = await supabase
       .from('users')
-      .select('id, username, email, is_verified, created_at')
+      .select('*')
       .ilike('username', username.trim())
       .single();
     return data;

@@ -7,9 +7,11 @@ const authenticateToken = (req, res, next) => {
 
   if (!token) return res.status(401).json({ error: 'Access denied' });
 
-  jwt.verify(token, JWT_SECRET, (err, user) => {
+  jwt.verify(token, JWT_SECRET, (err, decoded) => {
     if (err) return res.status(403).json({ error: 'Invalid token' });
-    req.user = user;
+    
+    const uid = decoded.id || decoded.userId;
+    req.user = { ...decoded, id: uid, userId: uid };
     next();
   });
 };

@@ -53,16 +53,19 @@ const handleRequestAction = async (req, res) => {
 
 const getFriendsList = async (req, res) => {
   try {
-    const friends = await Friend.getFriendsByUserId(req.user.userId);
+    const userId = req.user.id || req.user.userId;
+    const friends = await Friend.getFriendsByUserId(userId);
+    console.log(`FETCHED FRIENDS FOR ${userId}:`, friends.length);
     res.status(200).json(friends);
   } catch (error) {
+    console.error('getFriendsList Error:', error);
     res.status(500).json({ error: error.message });
   }
 };
 
 const getDashboardStats = async (req, res) => {
   try {
-    const userId = req.user.userId;
+    const userId = req.user.id || req.user.userId;
     const friends = await Friend.getFriendsByUserId(userId);
     const pendingRequests = await FriendRequest.getPendingRequests(userId);
     const totalSolved = await Submission.getTotalSolved(userId);

@@ -1,6 +1,7 @@
 import React from 'react';
 import { User, Activity, Clock, Award, ChevronRight, Hash } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const ContentProfile = ({ user }) => {
   if (!user) return null;
@@ -18,7 +19,9 @@ const ContentProfile = ({ user }) => {
       <div className="pt-20 px-10">
           <div className="flex justify-between items-start mb-10">
               <div>
-                  <h1 className="text-4xl font-black text-white mb-2 uppercase italic tracking-tighter">@{user.username}</h1>
+                  <h1 className="text-4xl font-black text-white mb-2 uppercase italic tracking-tighter hover:underline">
+                      <Link to={`/${user.username}`}>@{user.username}</Link>
+                  </h1>
                   <div className="flex items-center gap-2 text-[#949ba4] font-medium">
                       <Hash size={16} />
                       <span>Arena Operative Node // {user.username}</span>
