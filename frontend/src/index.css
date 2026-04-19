@@ -138,6 +138,26 @@
   * {
     border-color: var(--border);
   }
+  :root {
+    --discord-bg: #1E1F22;
+    --discord-card: #2B2D31;
+    --discord-sidebar: #232428;
+    --discord-blurple: #5865F2;
+    --discord-text-muted: #B5BAC1;
+  }
+
+  body {
+    background-color: var(--discord-bg);
+    color: #DBDEE1;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .discord-card {
+    background-color: var(--discord-card);
+    border-radius: 12px;
+    overflow: hidden;
+  }
   body {
     background-color: var(--background);
     color: var(--foreground);
@@ -155,5 +175,15 @@
     background-blend-mode: overlay, normal;
     background-attachment: fixed;
     min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }

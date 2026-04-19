@@ -68,6 +68,15 @@ const getProfile = async (req, res) => {
 
 const updateProfile = async (req, res) => {
   const userId = req.user.userId;
+  const username_param = req.params.username;
+  
+  const logMsg = (msg) => {
+      const line = `[${new Date().toISOString()}] [UPDATE] ${msg}\n`;
+      fs.appendFileSync(path.join(__dirname, '../debug.log'), line);
+  };
+
+  logMsg(`STARTING UPDATE FOR USER: ${userId} (${username_param})`);
+
   const { 
     username, 
     extra_data, 
@@ -143,7 +152,8 @@ const updateProfile = async (req, res) => {
         user_id: userId,
         github_url: technical_profiles.github_url || null,
         linkedin_url: technical_profiles.linkedin_url || null,
-        portfolio_url: technical_profiles.portfolio_url || null
+        portfolio_url: technical_profiles.portfolio_url || null,
+        leetcode_url: technical_profiles.leetcode_url || null
       };
 
       if (existing) {
@@ -195,6 +205,7 @@ const updateProfile = async (req, res) => {
 
     res.status(200).json({ message: 'Profile updated successfully', user });
   } catch (error) {
+    logMsg(`CRITICAL UPDATE ERROR: ${error.message} \nStack: ${error.stack}`);
     console.error("UPDATE PROFILE ERROR:", error);
     res.status(400).json({ error: error.message });
   }
@@ -253,4 +264,79 @@ const getCodingProfiles = async (req, res) => {
   }
 };
 
-module.exports = { getProfile, updateProfile, deleteProfile, searchUsers, getCodingProfiles };
+const getLeetCodeStats = async (req, res) => {
+  const { username } = req.params;
+  
+  const query = `
+    query userSessionProgress($username: String!) {
+      allQuestionsCount {
+        difficulty
+        count
+      }
+      matchedUser(username: $username) {
+        submitStats {
+          acSubmissionNum {
+            difficulty
+            count
+          }
+        }
+        submissionCalendar
+        profile {
+          ranking
+          reputation
+        }
+      }
+      recentAcSubmissionList(username: $username, limit: 5) {
+        title
+        titleSlug
+        timestamp
+      }
+    }
+  `;
+
+  try {
+    const response = await fetch('https://leetcode.com/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Referer': 'https://leetcode.com'
+      },
+      body: JSON.stringify({
+        query: query,
+        variables: { username }
+      })
+    });
+
+    const data = await response.json();
+
+    if (data.errors) {
+      return res.status(404).json({ error: 'LeetCode user not found' });
+    }
+
+    const { matchedUser, allQuestionsCount } = data.data;
+    if (!matchedUser) return res.status(404).json({ error: 'User not found' });
+
+    // Format like the proxy API to maintain frontend compatibility
+    const stats = {
+      status: 'success',
+      totalSolved: matchedUser.submitStats.acSubmissionNum.find(d => d.difficulty === 'All')?.count || 0,
+      totalQuestions: allQuestionsCount.find(d => d.difficulty === 'All')?.count || 0,
+      easySolved: matchedUser.submitStats.acSubmissionNum.find(d => d.difficulty === 'Easy')?.count || 0,
+      mediumSolved: matchedUser.submitStats.acSubmissionNum.find(d => d.difficulty === 'Medium')?.count || 0,
+      hardSolved: matchedUser.submitStats.acSubmissionNum.find(d => d.difficulty === 'Hard')?.count || 0,
+      totalEasy: allQuestionsCount.find(d => d.difficulty === 'Easy')?.count || 0,
+      totalMedium: allQuestionsCount.find(d => d.difficulty === 'Medium')?.count || 0,
+      totalHard: allQuestionsCount.find(d => d.difficulty === 'Hard')?.count || 0,
+      ranking: matchedUser.profile.ranking,
+      submissionCalendar: matchedUser.submissionCalendar,
+      recentSubmissions: data.data.recentAcSubmissionList || [],
+      acceptanceRate: 0 
+    };
+
+    res.status(200).json(stats);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch LeetCode data' });
+  }
+};
+
+module.exports = { getProfile, updateProfile, deleteProfile, searchUsers, getCodingProfiles, getLeetCodeStats };
