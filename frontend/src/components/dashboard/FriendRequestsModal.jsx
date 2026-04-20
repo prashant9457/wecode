@@ -168,9 +168,32 @@ import { getSocket } from '@/socket';
                                             </button>
                                         </div>
                                     ) : (
-                                        <div className="text-[#4e5058] group-hover:text-indigo-400 transition-colors pr-2">
-                                            <ArrowRight size={18} />
-                                        </div>
+                                        <button 
+                                            disabled={actioningId === req.id}
+                                            onClick={async () => {
+                                                setActioningId(req.id);
+                                                try {
+                                                    const token = localStorage.getItem('token');
+                                                    const res = await fetch('http://localhost:5000/api/requests/cancel', {
+                                                        method: 'POST',
+                                                        headers: { 
+                                                            'Content-Type': 'application/json',
+                                                            'Authorization': `Bearer ${token}`
+                                                        },
+                                                        body: JSON.stringify({ friendId: req.receiver_id })
+                                                    });
+                                                    if (res.ok) {
+                                                        setRequests(prev => prev.filter(r => r.id !== req.id));
+                                                        onUpdate?.();
+                                                    }
+                                                } finally {
+                                                    setActioningId(null);
+                                                }
+                                            }}
+                                            className="px-3 py-1.5 bg-rose-500/10 text-rose-500 hover:bg-rose-500 hover:text-white rounded-[4px] text-[10px] font-black uppercase tracking-widest transition-all border border-rose-500/20"
+                                        >
+                                            {actioningId === req.id ? <Loader2 size={12} className="animate-spin" /> : "Retrieve Request"}
+                                        </button>
                                     )}
                                 </div>
                             ))}

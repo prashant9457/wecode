@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const friendController = require('../controllers/friend.controller');
+const friendController = require('../controllers/friends');
 const { authenticateToken } = require('../middleware/auth.middleware');
 
 router.get('/feed', authenticateToken, friendController.getFeed);

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Search, X, UserPlus, UserMinus, Loader2, Check, Clock, Inbox } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { getSocket } from '@/socket';
@@ -8,6 +9,8 @@ const AddFriendModal = ({ onClose, isModal = true }) => {
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
     const [actionId, setActionId] = useState(null);
+
+    const currentUserId = localStorage.getItem('user_id');
 
     useEffect(() => {
         const socket = getSocket();
@@ -162,9 +165,8 @@ const AddFriendModal = ({ onClose, isModal = true }) => {
                             !isModal && "bg-[#2b2d31] rounded-xl border border-[#1f2023] overflow-hidden shadow-xl"
                         )}>
                             {results.map((user) => {
-                                const currentUserId = localStorage.getItem('user_id');
-                                const isOutgoingPending = user.request_status === 'pending' && user.request_sender_id === currentUserId;
-                                const isIncomingPending = user.request_status === 'pending' && user.request_sender_id !== currentUserId;
+                                const isOutgoingPending = user.request_status === 'pending' && String(user.request_sender_id) === String(currentUserId);
+                                const isIncomingPending = user.request_status === 'pending' && String(user.request_sender_id) !== String(currentUserId);
 
                                 return (
                                 <div key={user.id} className="flex items-center gap-3 p-4 hover:bg-[#2b2d31] transition-all group">
@@ -172,25 +174,35 @@ const AddFriendModal = ({ onClose, isModal = true }) => {
                                         {user.username[0].toUpperCase()}
                                     </div>
                                     <div className="flex-1 min-w-0">
-                                        <p className="text-white font-bold truncate">@{user.username}</p>
+                                        <p className="text-white font-bold truncate">
+                                            <Link to={`/${user.username}`} className="hover:underline">@{user.username}</Link>
+                                        </p>
                                         <p className="text-[10px] text-[#949ba4] font-black tracking-widest uppercase">ID: {user.id.slice(0, 8)}</p>
                                     </div>
                                     <div className="flex items-center gap-2">
                                         {user.is_friend ? (
-                                            <div className="flex items-center gap-2 px-3 py-1 bg-emerald-500/10 text-emerald-500 rounded-full text-[10px] font-black uppercase tracking-widest border border-emerald-500/20">
-                                                <Check size={14} /> Synchronized
+                                            <div className="flex items-center gap-2">
+                                                <div className="flex items-center gap-2 px-3 py-1 bg-emerald-500/10 text-emerald-500 rounded-full text-[10px] font-black uppercase tracking-widest border border-emerald-500/20">
+                                                    <Check size={14} /> Synchronized
+                                                </div>
+                                                <button 
+                                                    disabled={actionId === user.id}
+                                                    onClick={() => handleRemoveFriend(user.id)}
+                                                    className="w-9 h-9 flex items-center justify-center rounded-full bg-rose-500/10 text-rose-500 hover:bg-rose-500 hover:text-white transition-all active:scale-95"
+                                                    title="Sever Neural Link"
+                                                >
+                                                    {actionId === user.id ? <Loader2 size={16} className="animate-spin" /> : <UserMinus size={18} />}
+                                                </button>
                                             </div>
                                         ) : isOutgoingPending || user.requestSent ? (
-                                            <div className="flex items-center gap-2">
-                                                <div className="w-9 h-9 flex items-center justify-center rounded-full bg-orange-500/10 text-orange-400" title="Neural Link Pending">
-                                                    <Clock size={18} className="animate-pulse" />
-                                                </div>
+                                            <div className="flex items-center gap-4">
+                                                <span className="text-[10px] font-black uppercase tracking-widest text-indigo-400 opacity-80 italic animate-pulse">(Pending)</span>
                                                 <button 
                                                     disabled={actionId === user.id}
                                                     onClick={() => handleCancelRequest(user.id)}
                                                     className="px-3 py-1.5 bg-rose-500/10 text-rose-500 hover:bg-rose-500 hover:text-white rounded-[4px] text-[10px] font-black uppercase tracking-widest transition-all border border-rose-500/20"
                                                 >
-                                                    {actionId === user.id ? <Loader2 size={12} className="animate-spin" /> : "Retrieve Invitation"}
+                                                    {actionId === user.id ? <Loader2 size={12} className="animate-spin" /> : "Retrieve Request"}
                                                 </button>
                                             </div>
                                         ) : isIncomingPending ? (

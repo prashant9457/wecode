@@ -5,14 +5,15 @@ const { supabase } = require('../config/db');
 const fs = require('fs');
 const path = require('path');
 
+const logMsg = (msg) => {
+    const line = `[${new Date().toISOString()}] [USER_CTRL] ${msg}\n`;
+    const logPath = path.join(__dirname, '../debug.log');
+    fs.appendFileSync(logPath, line);
+};
+
 const getProfile = async (req, res) => {
   const { username } = req.params;
   const viewerId = req.user ? req.user.userId : null;
-
-  const logMsg = (msg) => {
-      const line = `[${new Date().toISOString()}] ${msg}\n`;
-      fs.appendFileSync(path.join(__dirname, '../debug.log'), line);
-  };
 
   logMsg(`FETCHING PROFILE FOR: ${username}`);
 
@@ -70,11 +71,6 @@ const updateProfile = async (req, res) => {
   const userId = req.user.userId;
   const username_param = req.params.username;
   
-  const logMsg = (msg) => {
-      const line = `[${new Date().toISOString()}] [UPDATE] ${msg}\n`;
-      fs.appendFileSync(path.join(__dirname, '../debug.log'), line);
-  };
-
   logMsg(`STARTING UPDATE FOR USER: ${userId} (${username_param})`);
 
   const { 
@@ -238,22 +234,35 @@ const searchUsers = async (req, res) => {
   try {
     const operatives = await User.searchUsers(q.trim(), currentUserId);
     
-    const enrichedResults = await Promise.all(operatives.map(async (op) => {
-      const isFriend = await Friend.isFriend(currentUserId, op.id);
-      
-      // Detailed request check
-      const { data: request } = await supabase
-        .from('friend_requests')
-        .select('status, sender_id')
-        .or(`and(sender_id.eq.${currentUserId},receiver_id.eq.${op.id}),and(sender_id.eq.${op.id},receiver_id.eq.${currentUserId})`)
-        .maybeSingle();
+    // Fetch all current operative's relevant requests to ensure absolute detection accuracy
+    const { data: allRequests } = await supabase
+      .from('friend_requests')
+      .select('*')
+      .or(`sender_id.eq.${currentUserId},receiver_id.eq.${currentUserId}`)
+      .order('created_at', { ascending: false }); // Prioritize newest records
+
+    logMsg(`searchUsers allRequests for ${currentUserId}: ${JSON.stringify(allRequests)}`);
+
+    const enrichedResults = operatives.map((op) => {
+      // Definite local lookup for existing request (now picks newest due to sorting)
+      const request = allRequests?.find(r => 
+        (r.sender_id === currentUserId && r.receiver_id === op.id) || 
+        (r.sender_id === op.id && r.receiver_id === currentUserId)
+      );
+
+      logMsg(`lookup op ${op.username} (${op.id}) - request found: ${JSON.stringify(request)}`);
 
       return { 
         ...op, 
-        is_friend: isFriend,
+        is_friend: false, 
         request_status: (request && request.status === 'pending') ? 'pending' : null,
         request_sender_id: request ? request.sender_id : null
       };
+    });
+
+    // Final friend status verification (parallel)
+    await Promise.all(enrichedResults.map(async (res) => {
+      res.is_friend = await Friend.isFriend(currentUserId, res.id);
     }));
 
     res.status(200).json(enrichedResults);
