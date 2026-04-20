@@ -192,13 +192,19 @@ const Submission = {
 
 const FriendRequest = {
   async sendRequest(senderId, receiverId) {
+    // Attempt to upsert: if it exists, update it to 'pending'
     const { data, error } = await supabase
       .from('friend_requests')
-      .insert([{ sender_id: senderId, receiver_id: receiverId, status: 'pending' }])
+      .upsert(
+        { sender_id: senderId, receiver_id: receiverId, status: 'pending', created_at: new Date() },
+        { onConflict: 'sender_id, receiver_id' }
+      )
       .select()
       .single();
+
     if (error) {
-      if (error.code === '23505') throw new Error('Request already exists');
+      // In case the unique constraint is different (e.g. bidirectional)
+      if (error.code === '23505') throw new Error('Request already exists and is immutable');
       throw error;
     }
     return data;
@@ -215,6 +221,22 @@ const FriendRequest = {
     return data.map(req => ({
       id: req.id,
       sender_id: req.sender_id,
+      username: req.users?.username || 'Unknown',
+      created_at: req.created_at
+    }));
+  },
+
+  async getSentRequests(userId) {
+    const { data, error } = await supabase
+      .from('friend_requests')
+      .select('id, receiver_id, created_at, users!friend_requests_receiver_id_fkey(username, email)')
+      .eq('sender_id', userId)
+      .eq('status', 'pending');
+    if (error) throw error;
+    
+    return data.map(req => ({
+      id: req.id,
+      receiver_id: req.receiver_id,
       username: req.users?.username || 'Unknown',
       created_at: req.created_at
     }));
@@ -238,6 +260,17 @@ const FriendRequest = {
     }
     
     return request;
+  },
+
+  async cancelRequest(senderId, receiverId) {
+    const { error } = await supabase
+      .from('friend_requests')
+      .delete()
+      .eq('sender_id', senderId)
+      .eq('receiver_id', receiverId)
+      .eq('status', 'pending');
+    if (error) throw error;
+    return true;
   },
 
   async getRequestStatus(user1Id, user2Id) {

@@ -240,11 +240,19 @@ const searchUsers = async (req, res) => {
     
     const enrichedResults = await Promise.all(operatives.map(async (op) => {
       const isFriend = await Friend.isFriend(currentUserId, op.id);
-      const requestStatus = await FriendRequest.getRequestStatus(currentUserId, op.id);
+      
+      // Detailed request check
+      const { data: request } = await supabase
+        .from('friend_requests')
+        .select('status, sender_id')
+        .or(`and(sender_id.eq.${currentUserId},receiver_id.eq.${op.id}),and(sender_id.eq.${op.id},receiver_id.eq.${currentUserId})`)
+        .maybeSingle();
+
       return { 
         ...op, 
         is_friend: isFriend,
-        request_status: requestStatus // 'pending', 'accepted', 'rejected' or null
+        request_status: (request && request.status === 'pending') ? 'pending' : null,
+        request_sender_id: request ? request.sender_id : null
       };
     }));
 

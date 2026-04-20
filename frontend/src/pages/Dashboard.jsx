@@ -21,34 +21,39 @@ import DashboardStats from '@/components/dashboard/DashboardStats';
 
 import FriendGrid from '@/components/dashboard/FriendGrid';
 import GroupsGrid from '@/components/dashboard/GroupsGrid';
+import AddFriendModal from '@/components/dashboard/AddFriendModal';
+import FriendRequestsModal from '@/components/dashboard/FriendRequestsModal';
 
 import WebGLLoader from '@/components/common/WebGLLoader';
 
+import { initSocket, getSocket, disconnectSocket } from '@/socket';
+
 const Dashboard = ({ openSearch }) => {
-  const navigate = useNavigate();
-  const [stats, setStats] = useState({
-    totalSolved: 0,
-    recentSolved: [],
-    friends: [],
-    totalFriends: 0,
-    pendingCount: 0
-  });
-  const [feed, setFeed] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  
-  // Column 1 State
-  const [activeCategory, setActiveCategory] = useState('dms');
-  
-  // Column 2 & 3 Selection State
-  const [activeSelection, setActiveSelection] = useState(null); 
-  
-  // Column 3 Sub-View State (for Feed/Overview)
-  const [activeView, setActiveView] = useState('launchpad'); 
-  
-  // Column 4 Panel State
-  const [rightWidth, setRightWidth] = useState(() => Number(localStorage.getItem('wecode_right_width')) || 340);
-  const [isRightCollapsed, setIsRightCollapsed] = useState(() => localStorage.getItem('wecode_right_collapsed') === 'true');
+    const navigate = useNavigate();
+    const [stats, setStats] = useState({
+        totalSolved: 0,
+        recentSolved: [],
+        friends: [],
+        totalFriends: 0,
+        pendingCount: 0
+    });
+    const [friendGridTab, setFriendGridTab] = useState('online');
+    const [feed, setFeed] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    // Column 1 State
+    const [activeCategory, setActiveCategory] = useState('dms');
+
+    // Column 2 & 3 Selection State
+    const [activeSelection, setActiveSelection] = useState(null);
+
+    // Column 3 Sub-View State (for Feed/Overview)
+    const [activeView, setActiveView] = useState('launchpad');
+
+    // Column 4 Panel State
+    const [rightWidth, setRightWidth] = useState(() => Number(localStorage.getItem('wecode_right_width')) || 340);
+    const [isRightCollapsed, setIsRightCollapsed] = useState(() => localStorage.getItem('wecode_right_collapsed') === 'true');
 
     useEffect(() => {
         localStorage.setItem('wecode_right_width', rightWidth);
@@ -58,59 +63,95 @@ const Dashboard = ({ openSearch }) => {
         localStorage.setItem('wecode_right_collapsed', isRightCollapsed);
     }, [isRightCollapsed]);
 
+    const fetchData = async () => {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+
+        try {
+            const [statsRes, feedRes, friendsRes] = await Promise.all([
+                fetch('http://localhost:5000/api/dashboard/stats', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                }),
+                fetch('http://localhost:5000/api/feed', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                }),
+                fetch('http://localhost:5000/api/friends', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                })
+            ]);
+
+            if (statsRes.status === 401 || feedRes.status === 401 || friendsRes.status === 401) {
+                localStorage.clear();
+                navigate('/login');
+                return;
+            }
+
+            if (statsRes.ok && friendsRes.ok) {
+                const statsData = await statsRes.json();
+                const friendsData = await friendsRes.json();
+
+                setStats({
+                    totalFriends: statsData.totalFriends || 0,
+                    pendingCount: statsData.pendingCount || 0,
+                    friends: Array.isArray(friendsData) ? friendsData : [],
+                    totalSolved: statsData.totalSolved || 0,
+                    recentSolved: Array.isArray(statsData.recentSolved) ? statsData.recentSolved : []
+                });
+            }
+
+            if (feedRes.ok) {
+                const feedData = await feedRes.json();
+                setFeed(Array.isArray(feedData) ? feedData : []);
+            }
+        } catch (err) {
+            console.error('Teletransmission Sync Failure:', err.message);
+        }
+    };
+
     useEffect(() => {
         const token = localStorage.getItem('token');
+        const userId = localStorage.getItem('user_id');
+
         if (!token) {
             navigate('/login');
             return;
         }
 
-        const fetchData = async () => {
-            try {
-                const [statsRes, feedRes, friendsRes] = await Promise.all([
-                    fetch('http://localhost:5000/api/dashboard/stats', {
-                        headers: { 'Authorization': `Bearer ${token}` }
-                    }),
-                    fetch('http://localhost:5000/api/feed', {
-                        headers: { 'Authorization': `Bearer ${token}` }
-                    }),
-                    fetch('http://localhost:5000/api/friends', {
-                        headers: { 'Authorization': `Bearer ${token}` }
-                    })
-                ]);
+        // Initialize Socket
+        const socket = initSocket(userId);
 
-                if (statsRes.status === 401 || feedRes.status === 401 || friendsRes.status === 401) {
-                    localStorage.clear();
-                    navigate('/login');
-                    return;
-                }
+        socket.on('friend_request_received', () => {
+            console.log('Real-time: New friend request received');
+            fetchData(); // Refresh stats for pending count
+        });
 
-                if (statsRes.ok && friendsRes.ok) {
-                    const statsData = await statsRes.json();
-                    const friendsData = await friendsRes.json();
-                    
-                    setStats({
-                        totalFriends: statsData.totalFriends || 0,
-                        pendingCount: statsData.pendingCount || 0,
-                        friends: Array.isArray(friendsData) ? friendsData : [],
-                        totalSolved: statsData.totalSolved || 0,
-                        recentSolved: Array.isArray(statsData.recentSolved) ? statsData.recentSolved : []
-                    });
-                }
+        socket.on('friend_request_accepted', () => {
+            console.log('Real-time: Friend request accepted');
+            fetchData(); // Refresh friends list and stats
+        });
 
-                if (feedRes.ok) {
-                    const feedData = await feedRes.json();
-                    setFeed(Array.isArray(feedData) ? feedData : []);
-                }
-            } catch (err) {
-                console.error('Teletransmission Sync Failure:', err.message);
-            } finally {
-                // Keep loading for a tactical second to show off the WebGL
-                setTimeout(() => setLoading(false), 1200);
-            }
+        socket.on('friend_request_rejected', () => {
+            console.log('Real-time: Friend request rejected');
+            fetchData(); // Refresh data to update UI buttons if search is active
+        });
+
+        socket.on('friend_request_canceled', () => {
+            console.log('Real-time: Friend request canceled by sender');
+            fetchData(); // Refresh pending count and lists
+        });
+
+        const initialFetch = async () => {
+            await fetchData();
+            // Keep loading for a tactical second to show off the WebGL
+            setTimeout(() => setLoading(false), 1200);
         };
 
-        fetchData();
+        initialFetch();
+
+        return () => {
+            // We might want to keep the socket alive during the session, 
+            // but it should handle clean up on app unmount or logout.
+        };
     }, [navigate]);
 
     if (loading) return (
@@ -133,16 +174,18 @@ const Dashboard = ({ openSearch }) => {
                 <div className="flex items-center gap-2">
                     <span className="font-black text-white text-[13px] uppercase tracking-[0.15em] truncate">
                         {activeView === 'selection' && activeSelection?.data
-                            ? (activeSelection.type === 'friend' ? activeSelection.data.username : activeSelection.data.name) 
-                            : (activeCategory === 'dms' ? "FRIENDS" : "CITADELS")}
+                            ? (activeSelection.type === 'friend' ? activeSelection.data.username : activeSelection.data.name)
+                            : (activeView === 'add_friend' ? "ADD OPERATIVE" : (activeView === 'requests' ? "NEURAL INVITATIONS" : (activeCategory === 'dms' ? "FRIENDS" : "CITADELS")))}
                     </span>
                     {activeView === 'selection' && activeSelection?.data && <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]" />}
                 </div>
             </header>
 
             <div className="flex-1 overflow-hidden">
-                <DiscordLayout 
+                <DiscordLayout
                     friends={stats.friends}
+                    pendingCount={stats.pendingCount}
+                    onRefresh={fetchData}
                     activeCategory={activeCategory}
                     activeSelectionId={activeView === 'friends' ? 'friends_grid_global' : (activeSelection?.type === 'friend' ? activeSelection.data.username : activeSelection?.data.id)}
                     onCategoryChange={(cat) => {
@@ -154,8 +197,9 @@ const Dashboard = ({ openSearch }) => {
                         setActiveSelection({ type, data });
                         setActiveView('selection');
                     }}
-                    onViewChange={(view) => {
+                    onViewChange={(view, tab) => {
                         setActiveView(view);
+                        if (view === 'friends' && tab) setFriendGridTab(tab);
                         if (view !== 'selection') setActiveSelection(null);
                     }}
                 >
@@ -170,20 +214,24 @@ const Dashboard = ({ openSearch }) => {
                             )}
 
                             {activeView === 'friends' && (
-                                <FriendGrid 
-                                    friends={stats.friends} 
-                                    onSelect={(f) => { setActiveSelection({ type: 'friend', data: f }); setActiveView('selection'); }} 
-                                    activeId={activeSelection?.data?.username} 
+                                <FriendGrid
+                                    friends={stats.friends}
+                                    pendingCount={stats.pendingCount}
+                                    onRefresh={fetchData}
+                                    activeTab={friendGridTab}
+                                    onTabChange={setFriendGridTab}
+                                    onSelect={(f) => { setActiveSelection({ type: 'friend', data: f }); setActiveView('selection'); }}
+                                    activeId={activeSelection?.data?.username}
                                 />
                             )}
 
                             {activeView === 'groups_grid' && (
-                                <GroupsGrid 
+                                <GroupsGrid
                                     groups={[
                                         { id: 'g1', name: 'Alpha-Coders', description: 'Advanced tactical algorithm conquest cluster.', members: 12, isPrivate: false },
                                         { id: 'g2', name: 'Bit-Crushers', description: 'High-speed bit manipulation and system design study node.', members: 8, isPrivate: true }
-                                    ]} 
-                                    onSelect={(g) => { setActiveSelection({ type: 'group', data: g }); setActiveView('selection'); }} 
+                                    ]}
+                                    onSelect={(g) => { setActiveSelection({ type: 'group', data: g }); setActiveView('selection'); }}
                                     activeId={activeSelection?.data?.id}
                                 />
                             )}
@@ -281,7 +329,7 @@ const Dashboard = ({ openSearch }) => {
                             )}
                         </main>
 
-                        <DashboardStats 
+                        <DashboardStats
                             stats={stats}
                             isCollapsed={isRightCollapsed}
                             onToggle={() => setIsRightCollapsed(!isRightCollapsed)}

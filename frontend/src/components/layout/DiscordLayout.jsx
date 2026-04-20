@@ -28,7 +28,9 @@ const DiscordLayout = ({
     onSelectionChange,
     onViewChange,
     activeSelectionId,
-    friends = []
+    friends = [],
+    pendingCount = 0,
+    onRefresh
 }) => {
   const navigate = useNavigate();
   const username = localStorage.getItem('username');
@@ -320,6 +322,8 @@ const DiscordLayout = ({
                        {activeCategory === 'dms' ? (
                          <SidebarFriends 
                             friends={friends?.length > 0 ? friends : fetchedFriends} 
+                            pendingCount={pendingCount}
+                            onRefresh={onRefresh}
                             onSelect={(f) => onSelectionChange?.('friend', f)} 
                             onViewChange={onViewChange}
                             activeId={activeSelectionId} 
@@ -358,7 +362,9 @@ const DiscordLayout = ({
 
       <main className="flex-1 flex flex-col bg-[#313338] min-w-0 overflow-hidden">
         {React.Children.map(children, child => 
-          React.isValidElement(child) ? React.cloneElement(child, { openSearch }) : child
+          React.isValidElement(child) && typeof child.type !== 'string' 
+            ? React.cloneElement(child, { openSearch }) 
+            : child
         )}
       </main>
 

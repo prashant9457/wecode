@@ -58,7 +58,7 @@ class FriendService {
       ]);
       
     if (insertErr) throw insertErr;
-    return true;
+    return request;
   }
 
   async rejectRequest(request_id) {

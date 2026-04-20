@@ -7,8 +7,15 @@ const userRoutes = require('./routes/user.routes');
 const oldFriendRoutes = require('./routes/friend.routes');
 const friendRoutes = require('./src/routes/friendRoutes');
 
+const http = require('http');
+const socketManager = require('./src/socket');
+
 const app = express();
+const server = http.createServer(app);
 const PORT = process.env.PORT || 5000;
+
+// Initialize Socket.io
+socketManager.init(server);
 
 // Global Middleware
 app.use(cors());
@@ -26,7 +33,7 @@ app.use('/api', oldFriendRoutes); // Dashboard needs /api/feed, /api/friends, /a
 app.use("/api/social", friendRoutes); // New system at /api/social
 
 // App Listen
-const server = app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server optimized and running on port ${PORT}`);
 });
 
