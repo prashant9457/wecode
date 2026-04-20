@@ -1242,3 +1242,454 @@ Stack: undefined
 [2026-04-20T13:10:32.854Z] [FRIEND_REQ_CTRL] Checking existing requests...
 [2026-04-20T13:10:32.967Z] [FRIEND_REQ_CTRL] Transmitting new request via model...
 [2026-04-20T13:10:33.084Z] [FRIEND_REQ_CTRL] SUCCESS: Request created, notifying receiver: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:16:28.678Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:16:28.707Z] [USER_CTRL] FETCHING PROFILE FOR: prasantsingh945252
+[2026-04-20T13:16:28.796Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:16:28.820Z] [USER_CTRL] USER FOUND: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5, fetching extra data...
+[2026-04-20T13:16:29.019Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:16:29.037Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:16:29.162Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:16:29.165Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:16:29.298Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:16:29.395Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: prasantsingh945252
+[2026-04-20T13:16:29.398Z] [USER_CTRL] FETCHING PROFILE FOR: prasantsingh945252
+[2026-04-20T13:16:29.507Z] [USER_CTRL] USER FOUND: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5, fetching extra data...
+[2026-04-20T13:16:29.523Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:16:29.640Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:16:29.743Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:16:29.857Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: prasantsingh945252
+[2026-04-20T13:16:48.421Z] [USER_CTRL] FETCHING PROFILE FOR: a
+[2026-04-20T13:16:48.558Z] [USER_CTRL] USER FOUND: 5cbd5512-c1a5-444a-966a-69a7e9530efe, fetching extra data...
+[2026-04-20T13:16:48.789Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:16:48.952Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: a
+[2026-04-20T13:16:48.954Z] [USER_CTRL] FETCHING PROFILE FOR: a
+[2026-04-20T13:16:49.059Z] [USER_CTRL] USER FOUND: 5cbd5512-c1a5-444a-966a-69a7e9530efe, fetching extra data...
+[2026-04-20T13:16:49.297Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:16:49.419Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: a
+[2026-04-20T13:17:18.011Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:17:18.120Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:17:18.585Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:17:18.716Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:17:18.719Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:17:18.835Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:17:19.058Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:17:19.210Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:18:12.272Z] [USER_CTRL] FETCHING PROFILE FOR: prasantsingh945252
+[2026-04-20T13:18:12.402Z] [USER_CTRL] USER FOUND: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5, fetching extra data...
+[2026-04-20T13:18:12.623Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:18:12.764Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: prasantsingh945252
+[2026-04-20T13:18:12.766Z] [USER_CTRL] FETCHING PROFILE FOR: prasantsingh945252
+[2026-04-20T13:18:12.871Z] [USER_CTRL] USER FOUND: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5, fetching extra data...
+[2026-04-20T13:18:13.083Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:18:13.215Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: prasantsingh945252
+[2026-04-20T13:18:19.431Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:18:19.543Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:18:19.769Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:18:19.917Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:18:19.920Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:18:20.030Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:18:20.248Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:18:20.378Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:18:35.661Z] [USER_CTRL] FETCHING PROFILE FOR: a
+[2026-04-20T13:18:35.810Z] [USER_CTRL] USER FOUND: 5cbd5512-c1a5-444a-966a-69a7e9530efe, fetching extra data...
+[2026-04-20T13:18:36.052Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:18:36.199Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: a
+[2026-04-20T13:18:36.201Z] [USER_CTRL] FETCHING PROFILE FOR: a
+[2026-04-20T13:18:36.313Z] [USER_CTRL] USER FOUND: 5cbd5512-c1a5-444a-966a-69a7e9530efe, fetching extra data...
+[2026-04-20T13:18:36.568Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:18:36.684Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: a
+[2026-04-20T13:18:38.972Z] [USER_CTRL] FETCHING PROFILE FOR: prasantsingh945252
+[2026-04-20T13:18:39.085Z] [USER_CTRL] USER FOUND: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5, fetching extra data...
+[2026-04-20T13:18:39.321Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:18:39.459Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: prasantsingh945252
+[2026-04-20T13:18:39.461Z] [USER_CTRL] FETCHING PROFILE FOR: prasantsingh945252
+[2026-04-20T13:18:39.613Z] [USER_CTRL] USER FOUND: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5, fetching extra data...
+[2026-04-20T13:18:39.836Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:18:39.958Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: prasantsingh945252
+[2026-04-20T13:18:40.771Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:18:40.883Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:18:41.119Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:18:41.234Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:18:41.238Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:18:41.351Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:18:41.580Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:18:41.710Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:19:20.321Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:19:20.441Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:19:20.671Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:19:20.806Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:19:20.808Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:19:20.922Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:19:21.153Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:19:21.284Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:19:31.528Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:19:31.637Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:19:31.856Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:19:32.001Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:19:32.004Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:19:32.116Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:19:32.346Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:19:32.482Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:20:01.677Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:20:01.789Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:20:02.041Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:20:02.157Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:20:02.161Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:20:02.273Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:20:02.494Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:20:02.634Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:20:22.534Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:20:22.638Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:20:22.863Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:20:23.008Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:20:23.011Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:20:23.121Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:20:23.344Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:20:23.480Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:20:43.076Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:20:43.192Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:20:43.418Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:20:43.547Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:20:43.550Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:20:43.661Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:20:43.888Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:20:44.034Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:22:09.622Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:22:09.734Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:22:09.963Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:22:10.090Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:22:10.093Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:22:10.205Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:22:10.428Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:22:10.556Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:22:34.714Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:22:34.842Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:22:35.068Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:22:35.192Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:22:35.195Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:22:35.243Z] [USER_CTRL] FETCHING PROFILE FOR: prasantsingh945252
+[2026-04-20T13:22:35.317Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:22:35.375Z] [USER_CTRL] USER FOUND: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5, fetching extra data...
+[2026-04-20T13:22:35.545Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:22:35.592Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:22:35.677Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:22:35.737Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: prasantsingh945252
+[2026-04-20T13:22:35.740Z] [USER_CTRL] FETCHING PROFILE FOR: prasantsingh945252
+[2026-04-20T13:22:35.849Z] [USER_CTRL] USER FOUND: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5, fetching extra data...
+[2026-04-20T13:22:36.071Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:22:36.184Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: prasantsingh945252
+[2026-04-20T13:23:30.987Z] [USER_CTRL] searchUsers allRequests for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38: [{"id":"431e72af-addf-4191-b67f-d2dd5678401a","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","status":"pending","created_at":"2026-04-20T13:10:32.967+00:00"},{"id":"ccd6d0cc-0087-4cc4-ba0c-87dbe878bb9a","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","status":"rejected","created_at":"2026-04-20T12:14:30.100794+00:00"},{"id":"7d30e274-6400-4335-855d-b266504d2958","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","status":"accepted","created_at":"2026-04-20T12:12:27.73482+00:00"}]
+[2026-04-20T13:23:31.965Z] [USER_CTRL] searchUsers allRequests for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38: [{"id":"431e72af-addf-4191-b67f-d2dd5678401a","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","status":"pending","created_at":"2026-04-20T13:10:32.967+00:00"},{"id":"ccd6d0cc-0087-4cc4-ba0c-87dbe878bb9a","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","status":"rejected","created_at":"2026-04-20T12:14:30.100794+00:00"},{"id":"7d30e274-6400-4335-855d-b266504d2958","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","status":"accepted","created_at":"2026-04-20T12:12:27.73482+00:00"}]
+[2026-04-20T13:23:33.608Z] [USER_CTRL] searchUsers allRequests for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38: [{"id":"431e72af-addf-4191-b67f-d2dd5678401a","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","status":"pending","created_at":"2026-04-20T13:10:32.967+00:00"},{"id":"ccd6d0cc-0087-4cc4-ba0c-87dbe878bb9a","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","status":"rejected","created_at":"2026-04-20T12:14:30.100794+00:00"},{"id":"7d30e274-6400-4335-855d-b266504d2958","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","status":"accepted","created_at":"2026-04-20T12:12:27.73482+00:00"}]
+[2026-04-20T13:23:35.968Z] [USER_CTRL] searchUsers allRequests for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38: [{"id":"431e72af-addf-4191-b67f-d2dd5678401a","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","status":"pending","created_at":"2026-04-20T13:10:32.967+00:00"},{"id":"ccd6d0cc-0087-4cc4-ba0c-87dbe878bb9a","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","status":"rejected","created_at":"2026-04-20T12:14:30.100794+00:00"},{"id":"7d30e274-6400-4335-855d-b266504d2958","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","status":"accepted","created_at":"2026-04-20T12:12:27.73482+00:00"}]
+[2026-04-20T13:23:35.969Z] [USER_CTRL] lookup op prasantsingh945252 (e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5) - request found: {"id":"431e72af-addf-4191-b67f-d2dd5678401a","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","status":"pending","created_at":"2026-04-20T13:10:32.967+00:00"}
+[2026-04-20T13:36:59.441Z] [USER_CTRL] FETCHING PROFILE FOR: prasantsingh945252
+[2026-04-20T13:36:59.555Z] [USER_CTRL] USER FOUND: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5, fetching extra data...
+[2026-04-20T13:36:59.778Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:36:59.917Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: prasantsingh945252
+[2026-04-20T13:36:59.920Z] [USER_CTRL] FETCHING PROFILE FOR: prasantsingh945252
+[2026-04-20T13:37:00.032Z] [USER_CTRL] USER FOUND: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5, fetching extra data...
+[2026-04-20T13:37:00.258Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:37:01.963Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: prasantsingh945252
+[2026-04-20T13:37:29.646Z] [USER_CTRL] searchUsers allRequests for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38: [{"id":"431e72af-addf-4191-b67f-d2dd5678401a","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","status":"pending","created_at":"2026-04-20T13:10:32.967+00:00"},{"id":"ccd6d0cc-0087-4cc4-ba0c-87dbe878bb9a","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","status":"rejected","created_at":"2026-04-20T12:14:30.100794+00:00"},{"id":"7d30e274-6400-4335-855d-b266504d2958","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","status":"accepted","created_at":"2026-04-20T12:12:27.73482+00:00"}]
+[2026-04-20T13:37:29.646Z] [USER_CTRL] lookup op prasantsingh945252 (e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5) - request found: {"id":"431e72af-addf-4191-b67f-d2dd5678401a","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","status":"pending","created_at":"2026-04-20T13:10:32.967+00:00"}
+[2026-04-20T13:42:17.863Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:42:17.989Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:42:18.277Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:42:18.432Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:42:18.435Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:42:18.549Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:42:18.784Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:42:18.914Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:42:55.573Z] [USER_CTRL] searchUsers allRequests for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38: [{"id":"431e72af-addf-4191-b67f-d2dd5678401a","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","status":"accepted","created_at":"2026-04-20T13:10:32.967+00:00"},{"id":"ccd6d0cc-0087-4cc4-ba0c-87dbe878bb9a","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","status":"rejected","created_at":"2026-04-20T12:14:30.100794+00:00"},{"id":"7d30e274-6400-4335-855d-b266504d2958","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","status":"accepted","created_at":"2026-04-20T12:12:27.73482+00:00"}]
+[2026-04-20T13:42:55.574Z] [USER_CTRL] lookup op dukestark945552 (de5c009e-436f-45ca-9bf6-8e90232f657c) - request found: {"id":"7d30e274-6400-4335-855d-b266504d2958","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","status":"accepted","created_at":"2026-04-20T12:12:27.73482+00:00"}
+[2026-04-20T13:42:56.033Z] [USER_CTRL] searchUsers allRequests for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38: [{"id":"431e72af-addf-4191-b67f-d2dd5678401a","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","status":"accepted","created_at":"2026-04-20T13:10:32.967+00:00"},{"id":"ccd6d0cc-0087-4cc4-ba0c-87dbe878bb9a","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","status":"rejected","created_at":"2026-04-20T12:14:30.100794+00:00"},{"id":"7d30e274-6400-4335-855d-b266504d2958","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","status":"accepted","created_at":"2026-04-20T12:12:27.73482+00:00"}]
+[2026-04-20T13:42:56.033Z] [USER_CTRL] lookup op dukestark945552 (de5c009e-436f-45ca-9bf6-8e90232f657c) - request found: {"id":"7d30e274-6400-4335-855d-b266504d2958","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","status":"accepted","created_at":"2026-04-20T12:12:27.73482+00:00"}
+[2026-04-20T13:44:23.876Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:44:23.988Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:44:24.213Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:44:24.374Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:44:24.376Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:44:24.487Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:44:24.710Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:44:24.854Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:48:31.169Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:48:31.312Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:48:31.541Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:48:31.993Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:48:31.996Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:48:32.104Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:48:32.342Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:48:32.471Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:48:47.494Z] [USER_CTRL] searchUsers allRequests for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38: [{"id":"431e72af-addf-4191-b67f-d2dd5678401a","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","status":"accepted","created_at":"2026-04-20T13:10:32.967+00:00"},{"id":"ccd6d0cc-0087-4cc4-ba0c-87dbe878bb9a","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","status":"rejected","created_at":"2026-04-20T12:14:30.100794+00:00"},{"id":"7d30e274-6400-4335-855d-b266504d2958","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","status":"accepted","created_at":"2026-04-20T12:12:27.73482+00:00"}]
+[2026-04-20T13:48:47.495Z] [USER_CTRL] lookup op dukestark945552 (de5c009e-436f-45ca-9bf6-8e90232f657c) - request found: {"id":"7d30e274-6400-4335-855d-b266504d2958","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","status":"accepted","created_at":"2026-04-20T12:12:27.73482+00:00"}
+[2026-04-20T13:49:37.296Z] [USER_CTRL] searchUsers allRequests for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38: [{"id":"431e72af-addf-4191-b67f-d2dd5678401a","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","status":"accepted","created_at":"2026-04-20T13:10:32.967+00:00"},{"id":"ccd6d0cc-0087-4cc4-ba0c-87dbe878bb9a","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","status":"rejected","created_at":"2026-04-20T12:14:30.100794+00:00"},{"id":"7d30e274-6400-4335-855d-b266504d2958","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","status":"accepted","created_at":"2026-04-20T12:12:27.73482+00:00"}]
+[2026-04-20T13:49:37.297Z] [USER_CTRL] lookup op dukestark945552 (de5c009e-436f-45ca-9bf6-8e90232f657c) - request found: {"id":"7d30e274-6400-4335-855d-b266504d2958","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","status":"accepted","created_at":"2026-04-20T12:12:27.73482+00:00"}
+[2026-04-20T13:50:05.111Z] [USER_CTRL] searchUsers allRequests for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38: [{"id":"431e72af-addf-4191-b67f-d2dd5678401a","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","status":"accepted","created_at":"2026-04-20T13:10:32.967+00:00"},{"id":"ccd6d0cc-0087-4cc4-ba0c-87dbe878bb9a","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","status":"rejected","created_at":"2026-04-20T12:14:30.100794+00:00"},{"id":"7d30e274-6400-4335-855d-b266504d2958","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","status":"accepted","created_at":"2026-04-20T12:12:27.73482+00:00"}]
+[2026-04-20T13:50:05.112Z] [USER_CTRL] lookup op dukestark945552 (de5c009e-436f-45ca-9bf6-8e90232f657c) - request found: {"id":"7d30e274-6400-4335-855d-b266504d2958","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","status":"accepted","created_at":"2026-04-20T12:12:27.73482+00:00"}
+[2026-04-20T13:50:59.336Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:50:59.950Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 0 agents
+[2026-04-20T13:50:59.955Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:51:00.188Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 0 agents
+[2026-04-20T13:51:01.591Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:51:01.596Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:51:01.705Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:51:01.878Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 0 agents
+[2026-04-20T13:51:01.884Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:51:01.957Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:51:02.098Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:51:02.102Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:51:02.113Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 0 agents
+[2026-04-20T13:51:02.211Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:51:02.446Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:51:02.588Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:55:51.262Z] [FRIEND_MODEL] Deep Sync START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:55:51.272Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:55:51.272Z] [FRIEND_MODEL] Deep Sync START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:55:51.529Z] [FRIEND_MODEL] Consolidated 2 unique operatives
+[2026-04-20T13:55:51.558Z] [FRIEND_MODEL] Consolidated 2 unique operatives
+[2026-04-20T13:55:51.648Z] [FRIEND_MODEL] CRITICAL FAILURE: column users.profile_picture does not exist
+[2026-04-20T13:55:51.670Z] [FRIEND_MODEL] CRITICAL FAILURE: column users.profile_picture does not exist
+[2026-04-20T13:55:51.670Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 0 agents
+[2026-04-20T13:55:51.676Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:55:51.677Z] [FRIEND_MODEL] Deep Sync START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:55:51.903Z] [FRIEND_MODEL] Consolidated 2 unique operatives
+[2026-04-20T13:55:52.012Z] [FRIEND_MODEL] Deep Sync START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:55:52.017Z] [FRIEND_MODEL] CRITICAL FAILURE: column users.profile_picture does not exist
+[2026-04-20T13:55:52.017Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 0 agents
+[2026-04-20T13:55:52.236Z] [FRIEND_MODEL] Consolidated 2 unique operatives
+[2026-04-20T13:55:52.347Z] [FRIEND_MODEL] CRITICAL FAILURE: column users.profile_picture does not exist
+[2026-04-20T13:55:53.246Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:55:53.247Z] [FRIEND_MODEL] Deep Sync START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:55:53.251Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:55:53.366Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:55:53.481Z] [FRIEND_MODEL] Consolidated 2 unique operatives
+[2026-04-20T13:55:53.589Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:55:53.596Z] [FRIEND_MODEL] CRITICAL FAILURE: column users.profile_picture does not exist
+[2026-04-20T13:55:53.597Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 0 agents
+[2026-04-20T13:55:53.601Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:55:53.601Z] [FRIEND_MODEL] Deep Sync START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:55:53.742Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:55:53.745Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:55:53.855Z] [FRIEND_MODEL] Consolidated 2 unique operatives
+[2026-04-20T13:55:53.856Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:55:53.965Z] [FRIEND_MODEL] CRITICAL FAILURE: column users.profile_picture does not exist
+[2026-04-20T13:55:53.965Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 0 agents
+[2026-04-20T13:55:54.078Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:55:54.196Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:57:28.378Z] [USER_CTRL] searchUsers allRequests for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38: [{"id":"431e72af-addf-4191-b67f-d2dd5678401a","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","status":"accepted","created_at":"2026-04-20T13:10:32.967+00:00"},{"id":"ccd6d0cc-0087-4cc4-ba0c-87dbe878bb9a","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","status":"rejected","created_at":"2026-04-20T12:14:30.100794+00:00"},{"id":"7d30e274-6400-4335-855d-b266504d2958","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","status":"accepted","created_at":"2026-04-20T12:12:27.73482+00:00"}]
+[2026-04-20T13:57:28.379Z] [USER_CTRL] lookup op dukestark945552 (de5c009e-436f-45ca-9bf6-8e90232f657c) - request found: {"id":"7d30e274-6400-4335-855d-b266504d2958","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","status":"accepted","created_at":"2026-04-20T12:12:27.73482+00:00"}
+[2026-04-20T13:58:26.632Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:58:27.283Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 2 agents
+[2026-04-20T13:58:27.288Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:58:27.838Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 2 agents
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:58:28.943Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:58:28.946Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:58:29.085Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:58:29.324Z] [USER_CTRL] Fetching from tables...
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:58:31.035Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:58:31.038Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:58:31.146Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 2 agents
+[2026-04-20T13:58:31.150Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:58:31.160Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:58:31.506Z] [USER_CTRL] Fetching from tables...
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:58:31.628Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:58:31.728Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 2 agents
+[2026-04-20T13:59:06.207Z] [SOCIAL_CTRL] getFriendsList START for: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T13:59:06.864Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 3 agents
+[2026-04-20T13:59:06.868Z] [SOCIAL_CTRL] getFriendsList START for: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T13:59:07.433Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 3 agents
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T13:59:08.444Z] [SOCIAL_CTRL] getFriendsList START for: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T13:59:08.447Z] [USER_CTRL] FETCHING PROFILE FOR: prasantsingh945252
+[2026-04-20T13:59:08.588Z] [USER_CTRL] USER FOUND: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5, fetching extra data...
+[2026-04-20T13:59:09.869Z] [USER_CTRL] Fetching from tables...
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T13:59:10.015Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: prasantsingh945252
+[2026-04-20T13:59:10.016Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 3 agents
+[2026-04-20T13:59:10.018Z] [USER_CTRL] FETCHING PROFILE FOR: prasantsingh945252
+[2026-04-20T13:59:10.022Z] [SOCIAL_CTRL] getFriendsList START for: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T13:59:10.132Z] [USER_CTRL] USER FOUND: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5, fetching extra data...
+[2026-04-20T13:59:10.360Z] [USER_CTRL] Fetching from tables...
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T13:59:10.479Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: prasantsingh945252
+[2026-04-20T13:59:10.572Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 3 agents
+[2026-04-20T13:59:17.491Z] [USER_CTRL] FETCHING PROFILE FOR: a
+[2026-04-20T13:59:17.618Z] [USER_CTRL] USER FOUND: 5cbd5512-c1a5-444a-966a-69a7e9530efe, fetching extra data...
+[2026-04-20T13:59:17.861Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:59:18.006Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: a
+[2026-04-20T13:59:18.008Z] [USER_CTRL] FETCHING PROFILE FOR: a
+[2026-04-20T13:59:18.119Z] [USER_CTRL] USER FOUND: 5cbd5512-c1a5-444a-966a-69a7e9530efe, fetching extra data...
+[2026-04-20T13:59:18.362Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:59:18.479Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: a
+[2026-04-20T13:59:19.137Z] [SOCIAL_CTRL] getFriendsList START for: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T13:59:19.713Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 3 agents
+[2026-04-20T13:59:19.717Z] [SOCIAL_CTRL] getFriendsList START for: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T13:59:20.327Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 3 agents
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T13:59:21.265Z] [SOCIAL_CTRL] getFriendsList START for: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T13:59:21.269Z] [USER_CTRL] FETCHING PROFILE FOR: prasantsingh945252
+[2026-04-20T13:59:21.423Z] [USER_CTRL] USER FOUND: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5, fetching extra data...
+[2026-04-20T13:59:21.656Z] [USER_CTRL] Fetching from tables...
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T13:59:21.805Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: prasantsingh945252
+[2026-04-20T13:59:21.807Z] [USER_CTRL] FETCHING PROFILE FOR: prasantsingh945252
+[2026-04-20T13:59:21.812Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 3 agents
+[2026-04-20T13:59:21.815Z] [SOCIAL_CTRL] getFriendsList START for: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T13:59:21.927Z] [USER_CTRL] USER FOUND: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5, fetching extra data...
+[2026-04-20T13:59:22.183Z] [USER_CTRL] Fetching from tables...
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T13:59:22.301Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: prasantsingh945252
+[2026-04-20T13:59:22.349Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 3 agents
+[2026-04-20T13:59:26.186Z] [SOCIAL_CTRL] getFriendsList START for: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T13:59:26.791Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 3 agents
+[2026-04-20T13:59:26.794Z] [SOCIAL_CTRL] getFriendsList START for: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T13:59:27.401Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 3 agents
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T13:59:28.618Z] [SOCIAL_CTRL] getFriendsList START for: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T13:59:28.620Z] [USER_CTRL] FETCHING PROFILE FOR: prasantsingh945252
+[2026-04-20T13:59:28.759Z] [USER_CTRL] USER FOUND: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5, fetching extra data...
+[2026-04-20T13:59:28.987Z] [USER_CTRL] Fetching from tables...
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T13:59:29.133Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: prasantsingh945252
+[2026-04-20T13:59:29.135Z] [USER_CTRL] FETCHING PROFILE FOR: prasantsingh945252
+[2026-04-20T13:59:29.164Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 3 agents
+[2026-04-20T13:59:29.167Z] [SOCIAL_CTRL] getFriendsList START for: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T13:59:29.245Z] [USER_CTRL] USER FOUND: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5, fetching extra data...
+[2026-04-20T13:59:29.491Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:59:29.611Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: prasantsingh945252
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T13:59:29.726Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 3 agents
+[2026-04-20T13:59:46.422Z] [USER_CTRL] searchUsers allRequests for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5: [{"id":"431e72af-addf-4191-b67f-d2dd5678401a","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","status":"accepted","created_at":"2026-04-20T13:10:32.967+00:00"},{"id":"ccd6d0cc-0087-4cc4-ba0c-87dbe878bb9a","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","status":"rejected","created_at":"2026-04-20T12:14:30.100794+00:00"},{"id":"ff26444f-c71a-4efb-a751-45cd729f62dc","sender_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","receiver_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","status":"accepted","created_at":"2026-04-18T17:05:20.855844+00:00"},{"id":"bbd11499-0f8c-4e88-9c0b-3096cb90d9e6","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","status":"accepted","created_at":"2026-04-18T16:04:58.507728+00:00"}]
+[2026-04-20T13:59:47.977Z] [USER_CTRL] searchUsers allRequests for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5: [{"id":"431e72af-addf-4191-b67f-d2dd5678401a","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","status":"accepted","created_at":"2026-04-20T13:10:32.967+00:00"},{"id":"ccd6d0cc-0087-4cc4-ba0c-87dbe878bb9a","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","status":"rejected","created_at":"2026-04-20T12:14:30.100794+00:00"},{"id":"ff26444f-c71a-4efb-a751-45cd729f62dc","sender_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","receiver_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","status":"accepted","created_at":"2026-04-18T17:05:20.855844+00:00"},{"id":"bbd11499-0f8c-4e88-9c0b-3096cb90d9e6","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","status":"accepted","created_at":"2026-04-18T16:04:58.507728+00:00"}]
+[2026-04-20T13:59:49.071Z] [USER_CTRL] searchUsers allRequests for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5: [{"id":"431e72af-addf-4191-b67f-d2dd5678401a","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","status":"accepted","created_at":"2026-04-20T13:10:32.967+00:00"},{"id":"ccd6d0cc-0087-4cc4-ba0c-87dbe878bb9a","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","status":"rejected","created_at":"2026-04-20T12:14:30.100794+00:00"},{"id":"ff26444f-c71a-4efb-a751-45cd729f62dc","sender_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","receiver_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","status":"accepted","created_at":"2026-04-18T17:05:20.855844+00:00"},{"id":"bbd11499-0f8c-4e88-9c0b-3096cb90d9e6","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","status":"accepted","created_at":"2026-04-18T16:04:58.507728+00:00"}]
+[2026-04-20T13:59:49.071Z] [USER_CTRL] lookup op abc (f23525e5-2de3-4ea2-b28e-fdaa3dd95f38) - request found: {"id":"431e72af-addf-4191-b67f-d2dd5678401a","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","status":"accepted","created_at":"2026-04-20T13:10:32.967+00:00"}
+[2026-04-20T13:59:54.403Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:59:54.977Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 2 agents
+[2026-04-20T13:59:54.981Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:59:55.534Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 2 agents
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:59:56.524Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:59:56.526Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:59:56.653Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:59:56.883Z] [USER_CTRL] Fetching from tables...
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:59:57.033Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T13:59:57.035Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T13:59:57.069Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 2 agents
+[2026-04-20T13:59:57.073Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:59:57.143Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T13:59:57.379Z] [USER_CTRL] Fetching from tables...
+[2026-04-20T13:59:57.502Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T13:59:57.613Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 2 agents
+[2026-04-20T14:00:01.373Z] [FRIEND_REQ_CTRL] sendFriendRequest START - userId: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5, friendId: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:01.374Z] [FRIEND_REQ_CTRL] Checking existing link...
+[2026-04-20T14:00:01.488Z] [FRIEND_REQ_CTRL] Checking existing requests...
+[2026-04-20T14:00:01.606Z] [FRIEND_REQ_CTRL] Transmitting new request via model...
+[2026-04-20T14:00:01.738Z] [FRIEND_REQ_CTRL] SUCCESS: Request created, notifying receiver: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:01.750Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 1 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 1 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:02.336Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 1 agents
+[2026-04-20T14:00:02.340Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 1 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:02.894Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 1 agents
+[FRIEND_MODEL] Simple Sync: Found 1 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:19.896Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:19.913Z] [SOCIAL_CTRL] getFriendsList START for: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T14:00:20.329Z] [USER_CTRL] searchUsers allRequests for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5: [{"id":"431e72af-addf-4191-b67f-d2dd5678401a","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","status":"accepted","created_at":"2026-04-20T14:00:01.607+00:00"},{"id":"ccd6d0cc-0087-4cc4-ba0c-87dbe878bb9a","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","status":"rejected","created_at":"2026-04-20T12:14:30.100794+00:00"},{"id":"ff26444f-c71a-4efb-a751-45cd729f62dc","sender_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","receiver_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","status":"accepted","created_at":"2026-04-18T17:05:20.855844+00:00"},{"id":"bbd11499-0f8c-4e88-9c0b-3096cb90d9e6","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","status":"accepted","created_at":"2026-04-18T16:04:58.507728+00:00"}]
+[2026-04-20T14:00:20.329Z] [USER_CTRL] lookup op abc (f23525e5-2de3-4ea2-b28e-fdaa3dd95f38) - request found: {"id":"431e72af-addf-4191-b67f-d2dd5678401a","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","status":"accepted","created_at":"2026-04-20T14:00:01.607+00:00"}
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T14:00:20.549Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 3 agents
+[2026-04-20T14:00:20.553Z] [SOCIAL_CTRL] getFriendsList START for: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T14:00:20.566Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 2 agents
+[2026-04-20T14:00:20.570Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:21.127Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 3 agents
+[2026-04-20T14:00:21.138Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 2 agents
+[2026-04-20T14:00:21.141Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:21.708Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 2 agents
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:31.128Z] [FRIEND_REQ_CTRL] sendFriendRequest START - userId: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5, friendId: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:31.128Z] [FRIEND_REQ_CTRL] Checking existing link...
+[2026-04-20T14:00:31.264Z] [FRIEND_REQ_CTRL] Checking existing requests...
+[2026-04-20T14:00:31.400Z] [FRIEND_REQ_CTRL] Transmitting new request via model...
+[2026-04-20T14:00:31.518Z] [FRIEND_REQ_CTRL] SUCCESS: Request created, notifying receiver: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:31.533Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 1 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 1 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:32.104Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 1 agents
+[2026-04-20T14:00:32.108Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 1 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:32.670Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 1 agents
+[FRIEND_MODEL] Simple Sync: Found 1 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:42.074Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:42.091Z] [SOCIAL_CTRL] getFriendsList START for: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T14:00:42.339Z] [USER_CTRL] searchUsers allRequests for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5: [{"id":"431e72af-addf-4191-b67f-d2dd5678401a","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","status":"accepted","created_at":"2026-04-20T14:00:31.401+00:00"},{"id":"ccd6d0cc-0087-4cc4-ba0c-87dbe878bb9a","sender_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","receiver_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","status":"rejected","created_at":"2026-04-20T12:14:30.100794+00:00"},{"id":"ff26444f-c71a-4efb-a751-45cd729f62dc","sender_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","receiver_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","status":"accepted","created_at":"2026-04-18T17:05:20.855844+00:00"},{"id":"bbd11499-0f8c-4e88-9c0b-3096cb90d9e6","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"de5c009e-436f-45ca-9bf6-8e90232f657c","status":"accepted","created_at":"2026-04-18T16:04:58.507728+00:00"}]
+[2026-04-20T14:00:42.340Z] [USER_CTRL] lookup op abc (f23525e5-2de3-4ea2-b28e-fdaa3dd95f38) - request found: {"id":"431e72af-addf-4191-b67f-d2dd5678401a","sender_id":"e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5","receiver_id":"f23525e5-2de3-4ea2-b28e-fdaa3dd95f38","status":"accepted","created_at":"2026-04-20T14:00:31.401+00:00"}
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T14:00:42.667Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 3 agents
+[2026-04-20T14:00:42.670Z] [SOCIAL_CTRL] getFriendsList START for: e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[2026-04-20T14:00:42.676Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 2 agents
+[2026-04-20T14:00:42.680Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:43.216Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 3 agents
+[2026-04-20T14:00:43.226Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 2 agents
+[2026-04-20T14:00:43.229Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 3 unique IDs for e70437f2-c7bf-4c7b-a53f-d3f64ebee1c5
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:43.767Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 2 agents
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:48.345Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:48.904Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 2 agents
+[2026-04-20T14:00:48.907Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:49.445Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 2 agents
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:50.438Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:50.440Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T14:00:50.570Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T14:00:50.842Z] [USER_CTRL] Fetching from tables...
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:50.982Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 2 agents
+[2026-04-20T14:00:50.984Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T14:00:50.987Z] [SOCIAL_CTRL] getFriendsList START for: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:50.990Z] [USER_CTRL] FETCHING PROFILE FOR: abc
+[2026-04-20T14:00:51.102Z] [USER_CTRL] USER FOUND: f23525e5-2de3-4ea2-b28e-fdaa3dd95f38, fetching extra data...
+[2026-04-20T14:00:51.356Z] [USER_CTRL] Fetching from tables...
+[FRIEND_MODEL] Simple Sync: Found 2 unique IDs for f23525e5-2de3-4ea2-b28e-fdaa3dd95f38
+[2026-04-20T14:00:51.474Z] [USER_CTRL] PROFILE FETCH COMPLETE FOR: abc
+[2026-04-20T14:00:51.540Z] [SOCIAL_CTRL] getFriendsList SUCCESS: Found 2 agents

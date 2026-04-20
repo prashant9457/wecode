@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 
 import { getSocket } from '@/socket';
+import UserAvatar from '@/components/common/UserAvatar';
  
- const FriendRequestsModal = ({ onClose, onUpdate, isModal = true }) => {
+const FriendRequestsModal = ({ onClose, onUpdate, isModal = true, onlineUsers = new Set() }) => {
      const [requests, setRequests] = useState([]);
      const [loading, setLoading] = useState(true);
      const [actioningId, setActioningId] = useState(null);
@@ -136,15 +137,21 @@ import { getSocket } from '@/socket';
                         )}>
                             {requests.map((req) => (
                                 <div key={req.id} className="flex items-center gap-3 p-4 hover:bg-[#2e3035] transition-all group">
-                                    <div className="w-12 h-12 rounded-full bg-[#1e1f22] flex items-center justify-center text-white font-bold text-lg border border-white/5 ring-0 group-hover:ring-2 ring-indigo-500/20 transition-all overflow-hidden">
-                                        {req.profile_picture ? <img src={req.profile_picture} className="w-full h-full object-cover" /> : req.username[0].toUpperCase()}
-                                    </div>
+                                    <UserAvatar 
+                                        username={req.username} 
+                                        profilePicture={req.profile_picture} 
+                                        isOnline={onlineUsers.has(activeTab === 'incoming' ? req.sender_id : req.receiver_id)} 
+                                        size="md" 
+                                    />
                                     <div className="flex-1 min-w-0">
                                         <p className="text-white font-bold truncate">
                                             <Link to={`/${req.username}`} className="hover:underline" onClick={(e) => e.stopPropagation()}>@{req.username}</Link>
                                         </p>
-                                        <p className="text-[10px] text-[#949ba4] font-black uppercase tracking-widest">
-                                            {activeTab === 'incoming' ? 'Incoming Neural Sync' : 'Outbound Transmission'}
+                                        <p className={cn(
+                                            "text-[10px] font-black uppercase tracking-wider",
+                                            onlineUsers.has(activeTab === 'incoming' ? req.sender_id : req.receiver_id) ? "text-emerald-500" : "text-[#949ba4]/60"
+                                        )}>
+                                            {onlineUsers.has(activeTab === 'incoming' ? req.sender_id : req.receiver_id) ? "Online" : "Offline"}
                                         </p>
                                     </div>
                                     

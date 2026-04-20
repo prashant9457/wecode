@@ -1,11 +1,18 @@
 const { Friend, Submission, FriendRequest } = require('../../models/friend.model');
+const fs = require('fs');
+const path = require('path');
 
 const getFriendsList = async (req, res) => {
+  const userId = req.user.id || req.user.userId;
+  const logPath = path.join(__dirname, '../../debug.log');
+  fs.appendFileSync(logPath, `[${new Date().toISOString()}] [SOCIAL_CTRL] getFriendsList START for: ${userId}\n`);
+
   try {
-    const userId = req.user.id || req.user.userId;
     const friends = await Friend.getFriendsByUserId(userId);
+    fs.appendFileSync(logPath, `[${new Date().toISOString()}] [SOCIAL_CTRL] getFriendsList SUCCESS: Found ${friends.length} agents\n`);
     res.status(200).json(friends);
   } catch (error) {
+    fs.appendFileSync(logPath, `[${new Date().toISOString()}] [SOCIAL_CTRL] getFriendsList ERROR: ${error.message}\n`);
     res.status(500).json({ error: error.message });
   }
 };

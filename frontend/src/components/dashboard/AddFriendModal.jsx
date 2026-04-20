@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { Search, X, UserPlus, UserMinus, Loader2, Check, Clock, Inbox } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { getSocket } from '@/socket';
+import UserAvatar from '@/components/common/UserAvatar';
 
-const AddFriendModal = ({ onClose, isModal = true }) => {
+const AddFriendModal = ({ onClose, isModal = true, onlineUsers = new Set() }) => {
     const [query, setQuery] = useState('');
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -61,7 +62,7 @@ const AddFriendModal = ({ onClose, isModal = true }) => {
             const token = localStorage.getItem('token');
             const res = await fetch('http://localhost:5000/api/friends/add', {
                 method: 'POST',
-                headers: { 
+                headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
@@ -88,7 +89,7 @@ const AddFriendModal = ({ onClose, isModal = true }) => {
             const token = localStorage.getItem('token');
             const res = await fetch('http://localhost:5000/api/friends/remove', {
                 method: 'DELETE',
-                headers: { 
+                headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
@@ -110,7 +111,7 @@ const AddFriendModal = ({ onClose, isModal = true }) => {
             const token = localStorage.getItem('token');
             const res = await fetch('http://localhost:5000/api/requests/cancel', {
                 method: 'POST',
-                headers: { 
+                headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
@@ -140,7 +141,7 @@ const AddFriendModal = ({ onClose, isModal = true }) => {
                     {isModal && <button onClick={onClose} className="text-[#949ba4] hover:text-white transition-colors"><X size={20} /></button>}
                 </div>
                 <div className={cn("relative group", !isModal && "max-w-[480px]")}>
-                    <input 
+                    <input
                         autoFocus
                         type="text"
                         placeholder="Search by Operative ID or Username..."
@@ -170,71 +171,65 @@ const AddFriendModal = ({ onClose, isModal = true }) => {
 
                                 return (
                                 <div key={user.id} className="flex items-center gap-3 p-4 hover:bg-[#2b2d31] transition-all group">
-                                    <div className="w-12 h-12 rounded-full bg-[#1e1f22] flex items-center justify-center text-white font-bold text-lg border border-white/5 shadow-inner">
-                                        {user.username[0].toUpperCase()}
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <p className="text-white font-bold truncate">
-                                            <Link to={`/${user.username}`} className="hover:underline">@{user.username}</Link>
-                                        </p>
-                                        <p className="text-[10px] text-[#949ba4] font-black tracking-widest uppercase">ID: {user.id.slice(0, 8)}</p>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        {user.is_friend ? (
-                                            <div className="flex items-center gap-2">
-                                                <div className="flex items-center gap-2 px-3 py-1 bg-emerald-500/10 text-emerald-500 rounded-full text-[10px] font-black uppercase tracking-widest border border-emerald-500/20">
-                                                    <Check size={14} /> Synchronized
+                                    <UserAvatar 
+                                        username={user.username} 
+                                        profilePicture={user.profile_picture} 
+                                        isOnline={onlineUsers.has(user.id)} 
+                                        size="md" 
+                                    />
+                                        <div className="flex-1 min-w-0">
+                                            <p className="text-white font-bold truncate">
+                                                <Link to={`/${user.username}`} className="hover:underline">@{user.username}</Link>
+                                            </p>
+                                            <p className={cn(
+                                                "text-[10px] font-black uppercase tracking-wider",
+                                                onlineUsers.has(user.id) ? "text-emerald-500" : "text-[#949ba4]/60"
+                                            )}>
+                                                {onlineUsers.has(user.id) ? "Online" : "Offline"}
+                                            </p>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            {user.is_friend ? (
+                                                <div className="flex items-center gap-2">
+                                                    <div className="flex items-center gap-2 px-3 py-1 bg-emerald-500/10 text-emerald-500 rounded-full text-[10px] font-black uppercase tracking-widest border border-emerald-500/20">
+                                                        <Check size={14} /> Synchronized
+                                                    </div>
+                                                    <button
+                                                        disabled={actionId === user.id}
+                                                        onClick={() => handleRemoveFriend(user.id)}
+                                                        className="w-9 h-9 flex items-center justify-center rounded-full bg-rose-500/10 text-rose-500 hover:bg-rose-500 hover:text-white transition-all active:scale-95"
+                                                        title="Sever Neural Link"
+                                                    >
+                                                        {actionId === user.id ? <Loader2 size={16} className="animate-spin" /> : <UserMinus size={18} />}
+                                                    </button>
                                                 </div>
-                                                <button 
+                                            ) : isOutgoingPending || user.requestSent ? (
+                                                <div className="flex items-center gap-4">
+                                                    <span className="text-[10px] font-black uppercase tracking-widest text-indigo-400 opacity-80 italic animate-pulse">(Pending)</span>
+                                                    <button
+                                                        disabled={actionId === user.id}
+                                                        onClick={() => handleCancelRequest(user.id)}
+                                                        className="px-3 py-1.5 bg-rose-500/10 text-rose-500 hover:bg-rose-500 hover:text-white rounded-[4px] text-[10px] font-black uppercase tracking-widest transition-all border border-rose-500/20"
+                                                    >
+                                                        {actionId === user.id ? <Loader2 size={12} className="animate-spin" /> : "Retrieve Request"}
+                                                    </button>
+                                                </div>
+                                            ) : isIncomingPending ? (
+                                                <div className="flex items-center gap-2 px-3 py-1 bg-indigo-500/10 text-indigo-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-indigo-500/20">
+                                                    <Inbox size={14} /> Neural Request Received
+                                                </div>
+                                            ) : (
+                                                <button
                                                     disabled={actionId === user.id}
-                                                    onClick={() => handleRemoveFriend(user.id)}
-                                                    className="w-9 h-9 flex items-center justify-center rounded-full bg-rose-500/10 text-rose-500 hover:bg-rose-500 hover:text-white transition-all active:scale-95"
-                                                    title="Sever Neural Link"
+                                                    onClick={() => handleAddFriend(user.id)}
+                                                    className="w-9 h-9 flex items-center justify-center rounded-full bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500 hover:text-white transition-all active:scale-95 border border-indigo-500/10"
+                                                    title="Send Neural Invitation"
                                                 >
-                                                    {actionId === user.id ? <Loader2 size={16} className="animate-spin" /> : <UserMinus size={18} />}
+                                                    {actionId === user.id ? <Loader2 size={16} className="animate-spin" /> : <UserPlus size={18} />}
                                                 </button>
-                                            </div>
-                                        ) : isOutgoingPending || user.requestSent ? (
-                                            <div className="flex items-center gap-4">
-                                                <span className="text-[10px] font-black uppercase tracking-widest text-indigo-400 opacity-80 italic animate-pulse">(Pending)</span>
-                                                <button 
-                                                    disabled={actionId === user.id}
-                                                    onClick={() => handleCancelRequest(user.id)}
-                                                    className="px-3 py-1.5 bg-rose-500/10 text-rose-500 hover:bg-rose-500 hover:text-white rounded-[4px] text-[10px] font-black uppercase tracking-widest transition-all border border-rose-500/20"
-                                                >
-                                                    {actionId === user.id ? <Loader2 size={12} className="animate-spin" /> : "Retrieve Request"}
-                                                </button>
-                                            </div>
-                                        ) : isIncomingPending ? (
-                                            <div className="flex items-center gap-2 px-3 py-1 bg-indigo-500/10 text-indigo-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-indigo-500/20">
-                                                <Inbox size={14} /> Neural Request Received
-                                            </div>
-                                        ) : (
-                                            <button 
-                                                disabled={actionId === user.id}
-                                                onClick={() => handleAddFriend(user.id)}
-                                                className="w-9 h-9 flex items-center justify-center rounded-full bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500 hover:text-white transition-all active:scale-95 border border-indigo-500/10"
-                                                title="Send Neural Invitation"
-                                            >
-                                                {actionId === user.id ? <Loader2 size={16} className="animate-spin" /> : <UserPlus size={18} />}
-                                            </button>
-                                        )}
-                                        
-                                        <button 
-                                            disabled={actionId === user.id || !user.is_friend}
-                                            onClick={() => handleRemoveFriend(user.id)}
-                                            className={cn(
-                                                "w-9 h-9 flex items-center justify-center rounded-full transition-all active:scale-95",
-                                                user.is_friend 
-                                                    ? "bg-rose-500/10 text-rose-500 hover:bg-rose-500 hover:text-white" 
-                                                    : "bg-white/5 text-[#4e5058] cursor-not-allowed opacity-0 group-hover:opacity-20"
                                             )}
-                                            title="Sever Neural Link"
-                                        >
-                                            {actionId === user.id ? <Loader2 size={16} className="animate-spin" /> : <UserMinus size={18} />}
-                                        </button>
+                                        </div>
                                     </div>
-                                </div>
                                 );
                             })}
                         </div>
@@ -252,7 +247,7 @@ const AddFriendModal = ({ onClose, isModal = true }) => {
                     )}
                 </div>
             </div>
-            
+
             <div className="bg-[#2b2d31] p-4 text-center border-t border-white/5">
                 <p className="text-[11px] text-[#4e5058] font-black uppercase tracking-[0.2em]">Authorized Sector Scan Active</p>
             </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { User, MessageSquare, Activity, Loader2, Inbox, UserPlus, Filter } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
+import UserAvatar from '@/components/common/UserAvatar';
 import AddFriendModal from './AddFriendModal';
 import FriendRequestsModal from './FriendRequestsModal';
 
@@ -11,11 +12,16 @@ const FriendGrid = ({
   activeId, 
   pendingCount = 0, 
   onRefresh,
-  activeTab = 'online',
-  onTabChange
+  activeTab = 'all',
+  onTabChange,
+  onlineUsers = new Set()
 }) => {
-  const onlineFriends = friends.filter(f => f.is_online !== false); 
-  const filteredFriends = activeTab === 'online' ? onlineFriends : friends;
+  const safeFriends = Array.isArray(friends) ? friends : [];
+  const currentTab = activeTab || 'all';
+  
+  const filteredFriends = currentTab === 'online' 
+    ? safeFriends.filter(f => f && f.id && onlineUsers?.has(String(f.id)))
+    : safeFriends;
 
   return (
     <div className="flex-1 flex flex-col min-h-0 bg-[#313338] animate-in fade-in duration-500">
@@ -72,9 +78,9 @@ const FriendGrid = ({
 
       <div className="flex-1 overflow-y-auto no-scrollbar relative">
         {activeTab === 'add_friend' ? (
-            <AddFriendModal isModal={false} />
+            <AddFriendModal isModal={false} onlineUsers={onlineUsers} />
         ) : activeTab === 'pending' ? (
-            <FriendRequestsModal isModal={false} onUpdate={onRefresh} />
+            <FriendRequestsModal isModal={false} onUpdate={onRefresh} onlineUsers={onlineUsers} />
         ) : (
             <div className="p-6">
                 <div className="max-w-[1200px] mx-auto">
@@ -84,9 +90,9 @@ const FriendGrid = ({
 
                     {filteredFriends.length > 0 ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                        {filteredFriends.map((friend) => (
+                        {filteredFriends.map((friend, idx) => (
                             <div 
-                            key={friend.id} 
+                            key={friend.id || friend.username || idx} 
                             onClick={() => onSelect(friend)}
                             className={cn(
                                 "bg-[#2b2d31] border border-[#1f2023] rounded-xl p-4 hover:border-indigo-500/50 transition-all group cursor-pointer relative overflow-hidden flex flex-col gap-4 shadow-lg hover:translate-y-[-2px]",
@@ -94,22 +100,27 @@ const FriendGrid = ({
                             )}
                             >
                                 <div className="flex items-center gap-3">
-                                    <div className="relative shrink-0">
-                                        <div className="w-12 h-12 rounded-full bg-[#1e1f22] border border-white/5 flex items-center justify-center font-bold text-white text-lg shadow-inner overflow-hidden">
-                                            {friend.profile_picture ? <img src={friend.profile_picture} className="w-full h-full object-cover" /> : friend.username[0].toUpperCase()}
-                                        </div>
-                                        <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-[#23a559] rounded-full border-[3px] border-[#2b2d31]"></div>
-                                    </div>
+                                    <UserAvatar 
+                                        username={friend.username} 
+                                        profilePicture={friend.profile_picture} 
+                                        isOnline={onlineUsers?.has(String(friend.id))} 
+                                        size="lg" 
+                                    />
                                     <div className="min-w-0 flex-1">
                                         <Link to={`/${friend.username}`} onClick={(e) => e.stopPropagation()} className="hover:underline text-white font-bold text-[15px] truncate block">@{friend.username}</Link>
-                                        <p className="text-[10px] text-[#949ba4] font-black tracking-widest uppercase opacity-60">ID: {friend.id.slice(0, 8)}</p>
+                                        <p className="text-[10px] text-[#949ba4] font-black tracking-widest uppercase opacity-60">ID: {String(friend.id || '').slice(0, 8) || 'Unknown'}</p>
                                     </div>
                                 </div>
                                 
                                 <div className="flex items-center justify-between pt-3 border-t border-white/5">
-                                    <div className="flex items-center gap-2 text-[#949ba4]">
-                                        <Activity size={12} className="text-emerald-500 animate-pulse" />
-                                        <span className="text-[9px] font-black uppercase tracking-widest">Active Link</span>
+                                    <div className="flex items-center gap-2">
+                                        <Activity size={12} className={cn(onlineUsers?.has(String(friend.id)) ? "text-emerald-500 animate-pulse" : "text-[#4e5058]")} />
+                                        <span className={cn(
+                                            "text-[9px] font-black uppercase tracking-widest",
+                                            onlineUsers?.has(String(friend.id)) ? "text-emerald-500" : "text-[#949ba4]/60"
+                                        )}>
+                                            {onlineUsers?.has(String(friend.id)) ? "Online" : "Offline"}
+                                        </span>
                                     </div>
                                     <div className="flex items-center gap-1">
                                         <div className="w-8 h-8 rounded-full bg-[#1e1f22] flex items-center justify-center text-[#949ba4] hover:text-white transition-colors border border-white/5 shadow-inner">
@@ -134,7 +145,7 @@ const FriendGrid = ({
                             <h3 className="text-[12px] font-black text-[#949ba4] uppercase tracking-[0.3em]">Neural Silence Detected</h3>
                             <p className="max-w-xs text-xs text-[#4e5058] mt-3 font-bold uppercase tracking-tight">No operatives synchronized in the current sector.</p>
                             <button 
-                                onClick={() => setActiveTab('add_friend')}
+                                onClick={() => onTabChange?.('add_friend')}
                                 className="mt-8 text-indigo-400 font-black text-[10px] uppercase tracking-widest hover:underline"
                             >
                                 Discovery Discovery Mode // Engage

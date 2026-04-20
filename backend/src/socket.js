@@ -6,7 +6,7 @@ const userSockets = new Map(); // userId -> [socketId1, socketId2, ...]
 const init = (server) => {
   io = new Server(server, {
     cors: {
-      origin: "*", // Adjust this in production
+      origin: "*", 
       methods: ["GET", "POST"]
     }
   });
@@ -17,11 +17,20 @@ const init = (server) => {
     socket.on("join", (userId) => {
       if (userId) {
         socket.userId = userId;
-        if (!userSockets.has(userId)) {
+        const previouslyOffline = !userSockets.has(userId);
+        
+        if (previouslyOffline) {
           userSockets.set(userId, []);
         }
         userSockets.get(userId).push(socket.id);
-        console.log(`User ${userId} joined with socket ${socket.id}`);
+        
+        if (previouslyOffline) {
+          io.emit('user_status_changed', { userId, status: 'online' });
+        }
+
+        // Send current online users to the newly joined user
+        socket.emit('online_users_list', Array.from(userSockets.keys()));
+        console.log(`User ${userId} joined [STATUS: ONLINE]`);
       }
     });
 
@@ -29,14 +38,14 @@ const init = (server) => {
       if (socket.userId && userSockets.has(socket.userId)) {
         const sockets = userSockets.get(socket.userId);
         const index = sockets.indexOf(socket.id);
-        if (index > -1) {
-          sockets.splice(index, 1);
-        }
+        if (index > -1) sockets.splice(index, 1);
+        
         if (sockets.length === 0) {
           userSockets.delete(socket.userId);
+          io.emit('user_status_changed', { userId: socket.userId, status: 'offline' });
+          console.log(`User ${socket.userId} disconnected [STATUS: OFFLINE]`);
         }
       }
-      console.log("Client disconnected:", socket.id);
     });
   });
 
@@ -44,11 +53,11 @@ const init = (server) => {
 };
 
 const getIO = () => {
-  if (!io) {
-    throw new Error("Socket.io not initialized!");
-  }
+  if (!io) throw new Error("Socket.io not initialized!");
   return io;
 };
+
+const getOnlineUsers = () => Array.from(userSockets.keys());
 
 const emitToUser = (userId, event, data) => {
   if (userSockets.has(userId)) {
@@ -59,4 +68,4 @@ const emitToUser = (userId, event, data) => {
   }
 };
 
-module.exports = { init, getIO, emitToUser };
+module.exports = { init, getIO, emitToUser, getOnlineUsers };

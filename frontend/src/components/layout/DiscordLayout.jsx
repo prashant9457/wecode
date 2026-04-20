@@ -20,6 +20,7 @@ import { cn } from '@/lib/utils';
 
 import SidebarFriends from '@/components/dashboard/SidebarFriends';
 import SidebarGroups from '@/components/dashboard/SidebarGroups';
+import UserAvatar from '@/components/common/UserAvatar';
 
 const DiscordLayout = ({ 
     children, 
@@ -30,7 +31,8 @@ const DiscordLayout = ({
     activeSelectionId,
     friends = [],
     pendingCount = 0,
-    onRefresh
+    onRefresh,
+    onlineUsers = new Set()
 }) => {
   const navigate = useNavigate();
   const username = localStorage.getItem('username');
@@ -168,12 +170,21 @@ const DiscordLayout = ({
                       className="px-4 py-3 rounded-lg hover:bg-indigo-500 group flex items-center justify-between cursor-pointer transition-colors"
                     >
                       <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-full bg-[#313338] border border-white/5 overflow-hidden flex items-center justify-center font-bold text-white group-hover:bg-white/10">
-                          {user.profile_picture ? <img src={user.profile_picture} className="w-full h-full object-cover" /> : user.username[0]}
-                        </div>
+                        <UserAvatar 
+                          username={user.username} 
+                          profilePicture={user.profile_picture} 
+                          isOnline={onlineUsers.has(user.id)} 
+                          size="md" 
+                          className="group-hover:scale-110 duration-300"
+                        />
                         <div>
                           <p className="font-bold text-white leading-tight">@{user.username}</p>
-                          <p className="text-[12px] text-[#949ba4] group-hover:text-white/80 transition-colors">Combatant Node</p>
+                          <p className={cn(
+                              "text-[10px] font-black uppercase tracking-wider",
+                              onlineUsers.has(user.id) ? "text-emerald-400 group-hover:text-emerald-200" : "text-[#949ba4] group-hover:text-white/60"
+                          )}>
+                              {onlineUsers.has(user.id) ? "Online" : "Offline"}
+                          </p>
                         </div>
                       </div>
                       <div className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-2 text-white font-bold text-[11px] uppercase tracking-widest">
@@ -222,10 +233,15 @@ const DiscordLayout = ({
            <div className="relative group/profile px-2 w-full flex justify-center py-2 transition-all">
                 <div 
                     onClick={() => navigate(`/${username}`)}
-                    className="w-12 h-12 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold text-sm cursor-pointer transition-all duration-300 hover:rounded-[16px] relative shadow-lg z-20 group-hover/profile:bg-indigo-500 overflow-hidden"
+                    className="cursor-pointer"
                 >
-                    <span className="group-hover/profile:scale-110 transition-transform duration-300">{username?.[0]?.toUpperCase()}</span>
-                    <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 rounded-full border-[3px] border-[#1e1f22]"></div>
+                    <UserAvatar 
+                        username={username} 
+                        profilePicture={profilePicture} 
+                        isOnline={true} 
+                        size="lg" 
+                        className="transition-all duration-300 hover:rounded-[16px]"
+                    />
                 </div>
 
                 {/* High-Fidelity Profile Expansion Bar with Hover Bridge */}
@@ -235,12 +251,12 @@ const DiscordLayout = ({
                     
                     <div className="bg-[#232428] border border-[#1f2023] shadow-[0_8px_24px_rgba(0,0,0,0.5)] rounded-[8px] flex items-center px-4 py-2 min-w-[300px] translate-x-[-10px] group-hover/profile:translate-x-0 transition-transform duration-300 h-16 pointer-events-auto">
                         <div className="flex items-center gap-3 flex-1 min-w-0">
-                            <div className="relative shrink-0">
-                                <div className="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold text-sm">
-                                    {username?.[0]?.toUpperCase()}
-                                </div>
-                                <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-emerald-500 rounded-full border-[2px] border-[#232428]"></div>
-                            </div>
+                            <UserAvatar 
+                                username={username} 
+                                profilePicture={profilePicture} 
+                                isOnline={true} 
+                                size="md" 
+                            />
                             <div className="flex flex-col min-w-0 flex-1">
                                 <button 
                                     onClick={() => navigate(`/${username}`)}
@@ -327,6 +343,7 @@ const DiscordLayout = ({
                             onSelect={(f) => onSelectionChange?.('friend', f)} 
                             onViewChange={onViewChange}
                             activeId={activeSelectionId} 
+                            onlineUsers={onlineUsers}
                          />
                        ) : (
                          <SidebarGroups 

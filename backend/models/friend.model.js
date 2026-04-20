@@ -1,39 +1,48 @@
 const { supabase } = require('../config/db');
+const fs = require('fs');
+const path = require('path');
 
 const Friend = {
   async getFriendsByUserId(userId) {
     try {
-      // 1. Fetch bidirectional friendship nodes
-      const { data: relationData, error: relError } = await supabase
-        .from('friends')
-        .select('friend_id, created_at')
-        .eq('user_id', userId);
+      const fs = require('fs');
+      const path = require('path');
+      const logPath = path.join(__dirname, '../debug.log');
       
-      if (relError) throw relError;
-      if (!relationData || relationData.length === 0) return [];
-
-      // 2. Resolve Operative Identities from Users Table
-      const friendIds = relationData.map(f => f.friend_id);
-      const { data: userData, error: userError } = await supabase
-        .from('users')
-        .select('id, username, email')
-        .in('id', friendIds);
+      // 1. Fetch from 'friends'
+      const { data: pNodes } = await supabase.from('friends').select('friend_id').eq('user_id', userId);
+      const { data: iNodes } = await supabase.from('friends').select('user_id').eq('friend_id', userId);
       
-      if (userError) throw userError;
+      // 2. Fetch from 'friend_requests'
+      const { data: sReqs } = await supabase.from('friend_requests').select('receiver_id').eq('sender_id', userId).eq('status', 'accepted');
+      const { data: rReqs } = await supabase.from('friend_requests').select('sender_id').eq('receiver_id', userId).eq('status', 'accepted');
 
-      // 3. Map Synchronized Telemetry
-      return relationData.map(rel => {
-        const identity = userData.find(u => u.id === rel.friend_id);
+      const ids = new Set();
+      if (pNodes) pNodes.forEach(n => ids.add(n.friend_id));
+      if (iNodes) iNodes.forEach(n => ids.add(n.user_id));
+      if (sReqs) sReqs.forEach(n => ids.add(n.receiver_id));
+      if (rReqs) rReqs.forEach(n => ids.add(n.sender_id));
+
+      const friendIds = Array.from(ids);
+      fs.appendFileSync(logPath, `[FRIEND_MODEL] Simple Sync: Found ${friendIds.length} unique IDs for ${userId}\n`);
+
+      if (friendIds.length === 0) return [];
+
+      // 3. Resolve Users
+      const { data: userData, error: uErr } = await supabase.from('users').select('id, username, email').in('id', friendIds);
+      if (uErr) fs.appendFileSync(logPath, `[FRIEND_MODEL] RESOLVE ERROR: ${uErr.message}\n`);
+      
+      return friendIds.map(id => {
+        const u = userData?.find(user => user.id === id);
         return {
-          id: rel.friend_id,
-          username: identity?.username || 'Unknown Operative',
-          email: identity?.email || '',
-          friends_since: rel.created_at,
-          status: 'online' // Synchronized status (static for now)
+          id: id,
+          username: u?.username || 'Unknown Operative',
+          email: u?.email || '',
+          profile_picture: null,
+          status: 'online'
         };
       });
     } catch (e) {
-      console.error('Teletransmission Failure (getFriends):', e.message);
       return [];
     }
   },

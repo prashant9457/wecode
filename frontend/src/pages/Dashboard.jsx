@@ -30,6 +30,7 @@ import { initSocket, getSocket, disconnectSocket } from '@/socket';
 
 const Dashboard = ({ openSearch }) => {
     const navigate = useNavigate();
+    const [onlineUsers, setOnlineUsers] = useState(new Set());
     const [stats, setStats] = useState({
         totalSolved: 0,
         recentSolved: [],
@@ -37,7 +38,7 @@ const Dashboard = ({ openSearch }) => {
         totalFriends: 0,
         pendingCount: 0
     });
-    const [friendGridTab, setFriendGridTab] = useState('online');
+    const [friendGridTab, setFriendGridTab] = useState('all');
     const [feed, setFeed] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -80,6 +81,8 @@ const Dashboard = ({ openSearch }) => {
                 })
             ]);
 
+            console.log(`[SYNC] Results: Stats(${statsRes.status}) Friends(${friendsRes.status}) Feed(${feedRes.status})`);
+
             if (statsRes.status === 401 || feedRes.status === 401 || friendsRes.status === 401) {
                 localStorage.clear();
                 navigate('/login');
@@ -89,6 +92,8 @@ const Dashboard = ({ openSearch }) => {
             if (statsRes.ok && friendsRes.ok) {
                 const statsData = await statsRes.json();
                 const friendsData = await friendsRes.json();
+
+                console.log(`[SYNC] Success. Friends Count: ${friendsData?.length || 0}`);
 
                 setStats({
                     totalFriends: statsData.totalFriends || 0,
@@ -104,7 +109,7 @@ const Dashboard = ({ openSearch }) => {
                 setFeed(Array.isArray(feedData) ? feedData : []);
             }
         } catch (err) {
-            console.error('Teletransmission Sync Failure:', err.message);
+            console.error('[SYNC] Teletransmission Sync Failure:', err.message);
         }
     };
 
@@ -138,6 +143,19 @@ const Dashboard = ({ openSearch }) => {
         socket.on('friend_request_canceled', () => {
             console.log('Real-time: Friend request canceled by sender');
             fetchData(); // Refresh pending count and lists
+        });
+
+        socket.on('online_users_list', (users) => {
+            setOnlineUsers(new Set(users));
+        });
+
+        socket.on('user_status_changed', ({ userId, status }) => {
+            setOnlineUsers(prev => {
+                const next = new Set(prev);
+                if (status === 'online') next.add(userId);
+                else next.delete(userId);
+                return next;
+            });
         });
 
         const initialFetch = async () => {
@@ -186,6 +204,7 @@ const Dashboard = ({ openSearch }) => {
                     friends={stats.friends}
                     pendingCount={stats.pendingCount}
                     onRefresh={fetchData}
+                    onlineUsers={onlineUsers}
                     activeCategory={activeCategory}
                     activeSelectionId={activeView === 'friends' ? 'friends_grid_global' : (activeSelection?.type === 'friend' ? activeSelection.data.username : activeSelection?.data.id)}
                     onCategoryChange={(cat) => {
@@ -222,6 +241,7 @@ const Dashboard = ({ openSearch }) => {
                                     onTabChange={setFriendGridTab}
                                     onSelect={(f) => { setActiveSelection({ type: 'friend', data: f }); setActiveView('selection'); }}
                                     activeId={activeSelection?.data?.username}
+                                    onlineUsers={onlineUsers}
                                 />
                             )}
 
